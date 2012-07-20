@@ -9,10 +9,13 @@ _templates
 Once those are added, you can run
 
 make html  
-
 or  
 make latexpdf  
 
 
-depending on your preferred output format
+depending on your preferred output format  
+  
+You will also need sphinx  
+
+<a href= "http://docs.geoserver.org/latest/en/docguide/install.html">sphinx</a>
 
