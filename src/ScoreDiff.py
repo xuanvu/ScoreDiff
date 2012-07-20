@@ -13,7 +13,7 @@ from music21.corpus import base
 import logging
 logging.basicConfig(filename='debug.log', level = logging.DEBUG)
 logging.disable(logging.DEBUG)
-import math
+
 
 class ScoreDiff:
     """The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
