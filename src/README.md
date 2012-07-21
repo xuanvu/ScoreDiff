@@ -17,5 +17,5 @@ depending on your preferred output format
   
 You will also need sphinx  
 
-<a href= "http://docs.geoserver.org/latest/en/docguide/install.html">sphinx</a>
+<a href= "http://packages.python.org/an_example_pypi_project/sphinx.html">sphinx</a>
 
