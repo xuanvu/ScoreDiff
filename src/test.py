@@ -221,6 +221,9 @@ def test_accidentals(score1, score2, measure = 0, part = 0):
 	   >>> test_accidentals('scriabin_opus_8_no2.mxl', 'ravel_sonatine_1.mxl')
 	   False
 
+	   >>> test_accidentals('bwv66.6.mxl', 'different_accidentals4.mxl')
+	   False
+
 
 	  
 	"""
