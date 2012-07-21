@@ -9,4 +9,3 @@ The documentation for this project can be found at:
 
 <a href = "http://cs.usfca.edu/~jdubeau/documentation">documentation</a>
 
-More will be added to the documentation soon, including plans for expanding on this project.
