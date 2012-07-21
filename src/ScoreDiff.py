@@ -140,8 +140,8 @@ class ScoreDiff:
 
 			accidentals2.append(notes2[index].accidental)
 	
-	logging.debug("accidentals1: " +str(accidentals1)) 
-	logging.debug("accidentals2: " +str(accidentals2))
+	logging.debug("accidentals1: " +str([x.name for x in accidentals1])) 
+	logging.debug("accidentals2: " +str([x.name for x in accidentals2]))
 	return accidentals1 == accidentals2
 
     def __get_most_recent_key__(self, msr=0, part=0, score_number=1):
