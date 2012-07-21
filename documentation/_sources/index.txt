@@ -4,17 +4,19 @@
    contain the root `toctree` directive.
 
 Welcome to ScoreDiff's Documentation!
-=====================================
+*************************************
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   about
    ScoreDiff
 
+
 Indices and tables
-==================
+*******************
 
 * :ref:`genindex`
 * :ref:`modindex`

@@ -1,5 +1,5 @@
 ScoreDiff Documentation
-========================
+************************
 
 .. automodule:: ScoreDiff
    :members:
