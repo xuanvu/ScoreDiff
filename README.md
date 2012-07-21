@@ -9,3 +9,6 @@ The documentation for this project can be found at:
 
 <a href = "http://cs.usfca.edu/~jdubeau/documentation">documentation</a>
 
+## Contact ##
+
+jdubeau@dons.usfca.edu
