@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ScoreDiff'
+project = u'scorediff'
 copyright = u'2012, Julien Dubeau'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -183,7 +183,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'ScoreDiff.tex', u'ScoreDiff Documentation',
+  ('index', 'scorediff.tex', u'scorediff documentation',
    u'Julien Dubeau', 'manual'),
 ]
 
@@ -213,7 +213,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'scorediff', u'ScoreDiff Documentation',
+    ('index', 'scorediff', u'scorediff documentation',
      [u'Julien Dubeau'], 1)
 ]
 
@@ -227,8 +227,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'ScoreDiff', u'ScoreDiff Documentation',
-   u'Julien Dubeau', 'ScoreDiff', 'One line description of project.',
+  ('index', 'scorediff', u'scorediff Documentation',
+   u'Julien Dubeau', 'scorediff', 'One line description of project.',
    'Miscellaneous'),
 ]
 
