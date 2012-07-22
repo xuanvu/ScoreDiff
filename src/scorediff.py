@@ -432,7 +432,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
 	
 	.. note:: This function will compares pitches in the order that they occur.  
-	To compare without considering order, use have_same_pitches_ignore_order.
+	   To compare without considering order, use have_same_pitches_ignore_order.
 
         
 	Kwargs:
@@ -768,7 +768,8 @@ class RangeError(Exception):
 		return repr(self.value)
 
 class MeasureRangeError(RangeError):
-	"""Class used for handling measure out of range errors
+	"""Exception raised when user enters a measure number that is out of range
+
 
 	"""
 	def __init__(self, value):

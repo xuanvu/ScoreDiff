@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 2
 
    about
-   scorediff
+   ScoreDiff
 
 
 Indices and tables
