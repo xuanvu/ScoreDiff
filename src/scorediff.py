@@ -19,6 +19,7 @@ class ScoreDiff:
     """The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
     to the initialization function, so that the user can detect and display certain differences.
 
+
     """
 
 
@@ -40,6 +41,7 @@ class ScoreDiff:
 
         Kwargs:
          localCorpusPath (str)  A path to a corpus if your files are located elsewhere
+
 
 	"""        
 	music21.environment.set('localCorpusPath', localCorpusPath)
@@ -111,6 +113,7 @@ class ScoreDiff:
 
 	Returns:
 	  list:  The collected accidentals
+
 
 	"""
 
@@ -197,6 +200,7 @@ class ScoreDiff:
 	Returns:
 	  int:	the measure number of the most recent key change
 
+
 	"""
 
         if(score_number == 1):
@@ -279,7 +283,8 @@ class ScoreDiff:
 
         Raises:
           ScoreException
-       
+
+
         """
 
         self.__verify_part_and_measure__(msr, part)
@@ -315,6 +320,7 @@ class ScoreDiff:
 
 	Returns:
 	  int.  The measure number of the most recent clef change
+
 
 	"""
 
@@ -780,6 +786,7 @@ class RangeError(Exception):
 
 	Args:
 	  value (str): An error message
+
 
 	"""
 
