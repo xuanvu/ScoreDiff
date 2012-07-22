@@ -20,13 +20,15 @@ class ScoreDiff:
     to the initialization function, so that the user can detect and display certain differences.
 
     """
-    
+
+
     #This ornaments list is used as a reference when comparing ornaments    
     ORNAMENTS = ['Appoggiatura', 'GeneralAppoggiatura', 'GeneralMordent', 'HalfStepAppoggiatura',
                  'HalfSetpInvertedAppoggiatura', 'HalfStepInvertedMordent', 'HalfStepMordent', 'HalfStepTrill',
                  'InvertedAppoggiatura', 'InvertedMordent', 'InvertedTurn', 'Mordent', 'Schleifer', 'Shake',
                  'Tremolo', 'Trill', 'Turn', 'WholeStepAppoggiatura', 'WholeStepInvertedAppoggiatura',
                  'WholeStepInvertedMordent', 'WholeStepMordent', 'WholeStepTrill']
+
 
     def __init__(self, score1, score2, localCorpusPath = '.'):
         """Initializes a ScoreDiff object.
@@ -45,7 +47,8 @@ class ScoreDiff:
        	self.score2 = base.parse(score2)
         self.name1 = score1
         self.name2 = score2
-	
+
+
     def display(self, msr=0, part=0):
         """Useful for displaying the differences between the two scores visually
 
@@ -56,12 +59,14 @@ class ScoreDiff:
           
 	  
         """
-	self.__verify_part_and_measure__(msr, part)	
+
+        self.__verify_part_and_measure__(msr, part)	
 	
 	partial1 = self.score1.parts[part].getElementsByClass('Measure')[msr]
 	partial2 = self.score2.parts[part].getElementsByClass('Measure')[msr]
         partial1.show()
         partial2.show()
+
 
     def have_same_accidentals(self, msr=0, part=0):
         """Checks if the two scores both have the same accidentals at the 
@@ -83,7 +88,8 @@ class ScoreDiff:
 	
 	
 	"""
-	self.__verify_part_and_measure__(msr, part)
+
+        self.__verify_part_and_measure__(msr, part)
         
 	accidentals1 = self.__get_accidentals__(msr,part,1)
 	accidentals2 = self.__get_accidentals__(msr,part,2)
@@ -91,6 +97,7 @@ class ScoreDiff:
 	logging.debug("accidentals1: " +str([x.name for x in accidentals1]))
 	logging.debug("accidentals2: " +str([x.name for x in accidentals2]))
 	return accidentals1 == accidentals2
+
 
     def __get_accidentals__(self, msr, part, score_number):
         """A helper function for the have_same_accidentals fuction
@@ -106,74 +113,76 @@ class ScoreDiff:
 	  list:  The collected accidentals
 
 	"""
-	if(score_number == 1):
 
-		measures = self.score1.parts[part].getElementsByClass('Measure')
-		notes = measures[msr].flat.notes
+        if(score_number == 1):
 
-		if(measures[msr].keySignature == None):
+	    measures = self.score1.parts[part].getElementsByClass('Measure')
+	    notes = measures[msr].flat.notes
 
-			measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 1)
-			altered = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
-			altered = [x.name for x in altered]
+	    if(measures[msr].keySignature == None):
 
-		else:
+                measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 1)
+                altered = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
+                altered = [x.name for x in altered]
 
-			altered = measures[msr].keySignature.alteredPitches
-			altered = [x.name for x in altered]
+            else:
+
+                altered = measures[msr].keySignature.alteredPitches
+                altered = [x.name for x in altered]
 		
-	elif(score_number == 2):
+        elif(score_number == 2):
 
-		measures = self.score2.parts[part].getElementsByClass('Measure')
-		notes = measures[msr].flat.notes
+            measures = self.score2.parts[part].getElementsByClass('Measure')
+            notes = measures[msr].flat.notes
 
-		if(measures[msr].keySignature == None):
+            if(measures[msr].keySignature == None):
 
-			measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 2)
-			altered = self.score2.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
-			altered = [x.name for x in altered]
+                measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 2)
+                altered = self.score2.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
+                altered = [x.name for x in altered]
 
-		else:
+            else:
 
-			altered = measures[msr].keySignature.alteredPitches
-			altered = [x.name for x in altered]
+                altered = measures[msr].keySignature.alteredPitches
+                altered = [x.name for x in altered]
 
-	naturals = set()
-	accidentals = []
+        naturals = set()
+        accidentals = []
 	
-	for index in range(0, len(notes)):
+        for index in range(0, len(notes)):
 
-		if(notes[index].isChord):
+            if(notes[index].isChord):
 
-			for pitch in notes[index].pitches:
+                for pitch in notes[index].pitches:
 
-				if(not pitch.accidental is None and not pitch.name in altered):
+                    if(not pitch.accidental is None and not pitch.name in altered):
 
-					accidentals.append(pitch.accidental)
+                        accidentals.append(pitch.accidental)
 
-					if(pitch.accidental.name == 'natural'):
+                        if(pitch.accidental.name == 'natural'):
 
-						naturals.add(pitch.name)
+                            naturals.add(pitch.name)
 
-				elif(pitch.name in altered and pitch.name[0] in naturals):
+                    elif(pitch.name in altered and pitch.name[0] in naturals):
 
-					accidentals.append(pitch.accidental)
-					naturals.discard(pitch.name)
+                        accidentals.append(pitch.accidental)
+                        naturals.discard(pitch.name)
 		
-		elif(not notes[index].accidental is None and not notes[index].name in altered):
+            elif(not notes[index].accidental is None and not notes[index].name in altered):
 
-			accidentals.append(notes[index].accidental)
+                accidentals.append(notes[index].accidental)
 
-			if(notes[index].accidental.name == 'natural'):
+                if(notes[index].accidental.name == 'natural'):
 
-				naturals.add(notes[index].name)
+                    naturals.add(notes[index].name)
 
-		elif(notes[index].name in altered and notes[index].name[0] in naturals):
+            elif(notes[index].name in altered and notes[index].name[0] in naturals):
 
-			accidentals.append(notes[index].accidental)
-			naturals.discard(notes[index].name)
+                accidentals.append(notes[index].accidental)
+                naturals.discard(notes[index].name)
 					
-	return accidentals
+        return accidentals
+
 
     def __get_most_recent_key__(self, msr=0, part=0, score_number=1):
         """Gets the measure number of the most recent key change
@@ -189,26 +198,28 @@ class ScoreDiff:
 	  int:	the measure number of the most recent key change
 
 	"""
-	if(score_number == 1):
 
-		keys = self.score1.parts[part].flat.getKeySignatures()
-		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
+        if(score_number == 1):
+
+	    keys = self.score1.parts[part].flat.getKeySignatures()
+	    target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	elif(score_number == 2):
 
-		keys = self.score2.parts[part].flat.getKeySignatures()
-		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
+	    keys = self.score2.parts[part].flat.getKeySignatures()
+	    target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
 	
 	current = 0
 
 	for key in keys:
 
-		if(key.measureNumber > current and key.measureNumber <= target_measure):
+	    if(key.measureNumber > current and key.measureNumber <= target_measure):
 
-			current = key.measureNumber
+	        current = key.measureNumber
 		
 	logging.debug("most recent key was: "+str(current))
 	return current	
+
 
     def have_same_articulations(self, msr=0, part=0):
         """Checks if the two scores both have the same articulations 
@@ -240,15 +251,16 @@ class ScoreDiff:
         
         for index in range(0, len(notes1)):
             
-        	articulations1 += notes1[index].articulations
+            articulations1 += notes1[index].articulations
 
 	for index in range(0, len(notes2)):
 
-		articulations2 += notes2[index].articulations
+	    articulations2 += notes2[index].articulations
         	
 	logging.debug("articulations1: " +str(articulations1))
 	logging.debug("articulations2: "+ str(articulations2))
         return articulations1 == articulations2
+
 
     def have_same_clef_markings(self, msr=0, part=0):
         """Checks if the two scores both have the same clef markings 
@@ -269,7 +281,8 @@ class ScoreDiff:
           ScoreException
        
         """
-	self.__verify_part_and_measure__(msr, part)
+
+        self.__verify_part_and_measure__(msr, part)
 	measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
         clef1 = measures1[msr].clef
@@ -277,18 +290,19 @@ class ScoreDiff:
 	
 	if(clef1 == None): 
 
-		current = self.__get_most_recent_clef__(msr, part, 1)
-		clef1 = self.score1.parts[part].measure(current).clef
+	    current = self.__get_most_recent_clef__(msr, part, 1)
+	    clef1 = self.score1.parts[part].measure(current).clef
 
 	if(clef2 == None):
 
-		current = self.__get_most_recent_clef__(msr, part, 2)
-		clef2 = self.score2.parts[part].measure(current).clef
+	    current = self.__get_most_recent_clef__(msr, part, 2)
+	    clef2 = self.score2.parts[part].measure(current).clef
         	
 	logging.debug("clef1.sign: " + str(clef1.sign))
 	logging.debug("clef2.sign: " + str(clef2.sign))
 	return clef1.sign == clef2.sign
     
+
     def __get_most_recent_clef__(self, msr=0, part=0, score_number=1):
         """Gets the measure number of the most recent clef change
 	
@@ -303,28 +317,28 @@ class ScoreDiff:
 	  int.  The measure number of the most recent clef change
 
 	"""
-	if(score_number == 1):
 
-		clefs = self.score1.parts[part].flat.getClefs()
-		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
+        if(score_number == 1):
+
+	    clefs = self.score1.parts[part].flat.getClefs()
+	    target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	elif(score_number == 2):
 
-		clefs = self.score2.parts[part].flat.getClefs()
-		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
+	    clefs = self.score2.parts[part].flat.getClefs()
+	    target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	current = 0
 
 	for clef in clefs:
 
-		if(clef.measureNumber > current and clef.measureNumber <= target_measure):
+	    if(clef.measureNumber > current and clef.measureNumber <= target_measure):
 
-			current = clef.measureNumber
+	        current = clef.measureNumber
 	
 	
 	logging.debug("most recent clef found: " + str(current))
 	return current
-
 
 
     def have_same_key_signature(self, msr=0, part=0):
@@ -347,6 +361,7 @@ class ScoreDiff:
        
 
         """
+
         self.__verify_part_and_measure__(msr, part)
         measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
@@ -355,13 +370,13 @@ class ScoreDiff:
 
 	if(key_signature1 == None):
 
-		current = self.__get_most_recent_key__(msr, part , 1)	
-		key_signature1 = self.score1.parts[part].measure(current).keySignature
+	    current = self.__get_most_recent_key__(msr, part , 1)	
+	    key_signature1 = self.score1.parts[part].measure(current).keySignature
 
 	if(key_signature2 == None):
 		
-		current = self.__get_most_recent_key__(msr, part, 2)
-		key_signature2 = self.score2.parts[part].measure(current).keySignature        	
+	    current = self.__get_most_recent_key__(msr, part, 2)
+	    key_signature2 = self.score2.parts[part].measure(current).keySignature        	
 	
 	logging.debug("key signature 1.sharps: "+str(key_signature1.sharps))
 	logging.debug("key signature 2.sharpts: "+str(key_signature2.sharps))
@@ -384,7 +399,8 @@ class ScoreDiff:
 
         Raises:
           ScoreException
-       
+
+
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -403,11 +419,11 @@ class ScoreDiff:
                 
                 classes = e1[inner_index].classes
 		    
-		for third_index in range(0, len(classes)):
+	        for third_index in range(0, len(classes)):
 
-			if(classes[third_index] in ScoreDiff.ORNAMENTS):
+		    if(classes[third_index] in ScoreDiff.ORNAMENTS):
                     
-                    		ornaments1.append(classes[third_index])
+                        ornaments1.append(classes[third_index])
                 
 	for index in range(0, len(notes2)):
 
@@ -417,21 +433,22 @@ class ScoreDiff:
                 
                 classes = e2[inner_index].classes
 
-		for third_index in range(0, len(classes)):
+	        for third_index in range(0, len(classes)):
 		    
-			if(classes[third_index] in ScoreDiff.ORNAMENTS):
+		    if(classes[third_index] in ScoreDiff.ORNAMENTS):
                         
-                        	ornaments2.append(classes[third_index])
+                        ornaments2.append(classes[third_index])
                 
         
 	logging.debug("ornaments1: "+ str(ornaments1))
 	logging.debug("ornaments2: " + str(ornaments2))
 	return ornaments1 == ornaments2    
-    
+
+
     def have_same_pitches(self, msr=0, part=0):
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
 	
-	.. note:: This function will compares pitches in the order that they occur.  
+	.. note:: This function will compare pitches in the order that they occur.  
 	   To compare without considering order, use have_same_pitches_ignore_order.
 
         
@@ -449,6 +466,7 @@ class ScoreDiff:
         Raises:
           ScoreException
        
+
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -480,6 +498,7 @@ class ScoreDiff:
         Raises:
 	   ScoreException
 
+
 	"""
 
 	self.__verify_part_and_measure__(msr, part)
@@ -490,8 +509,6 @@ class ScoreDiff:
 	logging.debug("pitches2: " + str(pitches2))
         return pitches1 == pitches2
 	
-
-
 
     def have_same_spanners(self, msr=0, part=0):
         """Checks if the two scores both have the same spanner 
@@ -511,6 +528,7 @@ class ScoreDiff:
         Raises:
           ScoreException
        
+
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -523,28 +541,28 @@ class ScoreDiff:
 
 	for index in range(0, len(notes1)):
 
-		if(notes1[index].isChord):
+	    if(notes1[index].isChord):
 
-			for pitch in notes1[index].pitches:
+	        for pitch in notes1[index].pitches:
 
-				spanners1 += pitch.getSpannerSites()
+		    spanners1 += pitch.getSpannerSites()
 
-		else:
+	    else:
 
-			spanners1 += notes1[index].getSpannerSites()
+	        spanners1 += notes1[index].getSpannerSites()
 	
 
 	for index in range(0, len(notes2)):
 		
-		if(notes2[index].isChord):
+	    if(notes2[index].isChord):
 
-			for pitch in notes2[index].pitches:
+	        for pitch in notes2[index].pitches:
 
-				spanners2 += pitch.getSpannerSites()
+		    spanners2 += pitch.getSpannerSites()
 
-		else:
+	    else:
 
-			spanners2 += notes2[index].getSpannerSites()
+	        spanners2 += notes2[index].getSpannerSites()
 	
 	logging.debug("spanners1: " + str(spanners1))
 	logging.debug("spanners2: " + str(spanners2))
@@ -569,6 +587,7 @@ class ScoreDiff:
         Raises:
           ScoreException
        
+
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -581,37 +600,37 @@ class ScoreDiff:
         
 	for index in range(0, len(notes1)):
 
-		if(notes1[index].isChord):
+	    if(notes1[index].isChord):
 
-			temp = []
+	        temp = []
 
-			for pitch in notes1[index].pitches:
+		for pitch in notes1[index].pitches:
 
-				temp+=[notes1[index].getStemDirection(pitch)]
+		    temp+=[notes1[index].getStemDirection(pitch)]
 
-			stems1+=list(set(temp))
+		    stems1+=list(set(temp))
 
 						
-		else:
+	    else:
 
-			stems1+=[notes1[index].stemDirection]
+	        stems1+=[notes1[index].stemDirection]
 	
-	for index in range(0, len(notes2)):
+        for index in range(0, len(notes2)):
 			
-		if(notes2[index].isChord):
+	    if(notes2[index].isChord):
 
-			temp = []
+	        temp = []
 
-			for pitch in notes2[index].pitches:
+		for pitch in notes2[index].pitches:
 
-				temp+=[notes2[index].getStemDirection(pitch)]
+		    temp+=[notes2[index].getStemDirection(pitch)]
 
-			stems2 += list(set(temp))
+		    stems2 += list(set(temp))
 
 			
-		else:
+            else:
 
-			stems2+=[notes2[index].stemDirection]
+                stems2+=[notes2[index].stemDirection]
 	
 	logging.debug("stems1: " + str(stems1))
 	logging.debug("stems2: " + str(stems2))
@@ -636,6 +655,7 @@ class ScoreDiff:
         Raises:
           ScoreException
        
+
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -646,13 +666,13 @@ class ScoreDiff:
 	
 	if(time_signature1 == None):
 
-		current = self.__get_most_recent_time__(msr, part ,1)
-		time_signature1 = self.score1.parts[part].measure(current).timeSignature
+	    current = self.__get_most_recent_time__(msr, part ,1)
+	    time_signature1 = self.score1.parts[part].measure(current).timeSignature
 	
 	if(time_signature2 == None):
 		
-		current = self.__get_most_recent_time__(msr, part, 2)
-		time_signature2 = self.score2.parts[part].measure(current).timeSignature
+	    current = self.__get_most_recent_time__(msr, part, 2)
+	    time_signature2 = self.score2.parts[part].measure(current).timeSignature
 	
 	numerator1 = time_signature1.numerator
         numerator2 = time_signature2.numerator
@@ -679,23 +699,24 @@ class ScoreDiff:
 
 
 	"""
-	if(score_number == 1):
 
-		times = self.score1.parts[part].flat.getTimeSignatures()
-		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
+        if(score_number == 1):
+
+	    times = self.score1.parts[part].flat.getTimeSignatures()
+	    target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	elif(score_number == 2):
 
-		times = self.score2.parts[part].flat.getTimeSignatures()
-		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
+	    times = self.score2.parts[part].flat.getTimeSignatures()
+	    target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	current = 0
 
 	for time in times:
 
-		if(time.measureNumber > current and time.measureNumber <= target_measure):
+	    if(time.measureNumber > current and time.measureNumber <= target_measure):
 
-			current = time.measureNumber
+	        current = time.measureNumber
 	
 	logging.debug("most recent time found: "+str(current))
 	return current
@@ -713,16 +734,18 @@ class ScoreDiff:
         Raises:
           ScoreException
 
+
         """
-	self.__verify_part__(part)
+
+        self.__verify_part__(part)
 
 	if (msr >= len(self.score1.parts[part].getElementsByClass('Measure').elements) or msr < 0):
 
-		raise MeasureRangeError("measure number "+str(msr) + " does not exist for "+self.name1)
+	    raise MeasureRangeError("measure number "+str(msr) + " does not exist for "+self.name1)
 	
 	if (msr >= len(self.score2.parts[part].getElementsByClass('Measure').elements) or msr < 0):
 		
-		raise MeasureRangeError("measure number "+str(msr) + " does not exist for "+self.name2)
+	    raise MeasureRangeError("measure number "+str(msr) + " does not exist for "+self.name2)
 
 
     def __verify_part__(self, part):
@@ -734,95 +757,107 @@ class ScoreDiff:
 	Raises:
 	  ScoreException
 
-	"""
-	if (part >= len(self.score1.parts) or part < 0):
 
-        	raise PartRangeError("part number " + str(part) + " does not exist for " + self.name1)
+	"""
+
+        if (part >= len(self.score1.parts) or part < 0):
+
+            raise PartRangeError("part number " + str(part) + " does not exist for " + self.name1)
 
         if (part >= len(self.score2.parts) or part < 0):
 
-        	raise PartRangeError("part number " + str(part) + " does not exist for " + self.name2)
+            raise PartRangeError("part number " + str(part) + " does not exist for " + self.name2)
 
 
 class RangeError(Exception):
-	"""Class for handling range erros while using the ScoreDiff tool
+    """Class for handling range erros while using the ScoreDiff tool
+
+
+    """
+
+    def __init__(self , value):
+        """Initializes the RangeError object
+
+	Args:
+	  value (str): An error message
+
+	"""
+
+        self.value = value
+
+
+    def __str__(self):
+	"""Function for fetching this object's error message
+		
+	Returns:
+	  This object's error message
 
 
 	"""
-        def __init__(self , value):
-		"""Initializes the RangeError object
 
-		Args:
-		 value (str): An error message
+        return repr(self.value)
 
-		"""
-		self.value = value
-
-	def __str__(self):
-		"""Function for fetching this object's error message
-		
-		Returns:
-		 This object's error message
-
-		"""
-		return repr(self.value)
 
 class MeasureRangeError(RangeError):
-	"""Exception raised when user enters a measure number that is out of range
+    """Exception raised when user enters a measure number that is out of range
+
+
+    """
+  
+  
+    def __init__(self, value):
+	"""Initializes the MeasureRangeError object
+
+	Args:
+          value (str): An error message
 
 
 	"""
-	def __init__(self, value):
-		"""Initializes the MeasureRangeError object
 
-		Args:
-		  value (str): An error message
+	self.value = value
 
-		"""
 
-		self.value = value
+    def __str__(self):
+	"""Function for fetching this object's error message"
 
-	def __str__(self):
-		"""Function for fetching this object's error message"
+	Returns:
+          This object's error message
 
-		Returns:
-		  This object's error message
 
-		"""
-		return repr(self.value)
+	"""
+
+        return repr(self.value)
 
 
 class PartRangeError(RangeError):
-	"""Exception raised when user enters a part number that is out
-	of range
+    """Exception raised when user enters a part number that is out of range
 	
+
+    """
+   
+   
+    def __init__(self, value):
+	"""Initializes the PartRangeError object
+
+	Args:
+          value (str): An error message
+
+
 	"""
-	def __init__(self, value):
-		"""Initializes the PartRangeError object
 
-		Args:
-		  value (str): An error message
-
-		"""
-		self.value = value
-
-	def __str__(self):
-		"""Function for fetching this object's error message
-
-		Returns:
-		  This object's error message
-
-		"""
-		return repr(self.value)
+        self.value = value
 
 
-"""
+    def __str__(self):
+	"""Function for fetching this object's error message
 
-.. rubric:: Footnotes
+	Returns:
+	  This object's error message
 
-.. [#f2] http://mit.edu/music21/doc/html/moduleArticulations.html?highlight=articulation#music21.articulations
 
-.. [#f1] http://mit.edu/music21/doc/html/moduleSpanner.html
+	"""
 
-"""
+        return repr(self.value)
+
+
 
