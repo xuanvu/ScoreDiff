@@ -129,7 +129,7 @@ class ScoreDiff:
 						
 						naturals.add(pitch.name)
 
-				elif(pitch.name in altered1 and pitch.name in naturals[:1]):
+				elif(pitch.name in altered1 and pitch.name[0] in naturals):
 
 					accidentals1.append(pitch.accidental)
 					naturals.dicard(pitch.name)
@@ -142,7 +142,7 @@ class ScoreDiff:
 
 				naturals.add(notes1[index].name)
 
-		elif(notes1[index].name in altered1 and notes1[index].name[:1] in naturals):
+		elif(notes1[index].name in altered1 and notes1[index].name[0] in naturals):
 
 			accidentals1.append(notes1[index].accidental)
 			naturals.discard(notes1[index].name)
@@ -163,7 +163,7 @@ class ScoreDiff:
 
 						naturals.add(pitch.name)
 
-				elif(pitch.name in altered2 and pitch.name[:1] in naturals):
+				elif(pitch.name in altered2 and pitch.name[0] in naturals):
 
 					accidentals2.append(pitch.accidental)
 					naturals.discard(pitch.name)
@@ -176,7 +176,7 @@ class ScoreDiff:
 
 				naturals.add(notes2[index].name)
 
-		elif(notes2[index].name in altered2 and notes2[index].name[:1] in naturals):
+		elif(notes2[index].name in altered2 and notes2[index].name[0] in naturals):
 
 			accidentals2.append(notes2[index].accidental)
 			naturals.discard(notes2[index].name)
