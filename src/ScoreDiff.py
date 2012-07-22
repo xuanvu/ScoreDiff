@@ -13,7 +13,7 @@ from music21.corpus import base
 import logging
 logging.basicConfig(filename='debug.log', level = logging.DEBUG)
 #To enable debug output, comment out the following line
-logging.disable(logging.DEBUG)
+#logging.disable(logging.DEBUG)
 
 
 class ScoreDiff:
@@ -86,105 +86,99 @@ class ScoreDiff:
 
 	self.__verify_part_and_measure__(msr, part)
 
-        measures1 = self.score1.parts[part].getElementsByClass('Measure')
-	measures2 = self.score2.parts[part].getElementsByClass('Measure')
-	notes1 = measures1[msr].flat.notes
-        notes2 = measures2[msr].flat.notes
-	accidentals1 = []
-	accidentals2 = []
-
-	if(measures1[msr].keySignature == None):
-
-		measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 1)
-		altered1 = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
-		altered1 = [x.name for x in altered1]
-
-	else:
-
-		altered1 = measures1[msr].keySignature.alteredPitches
-		altered1 = [x.name for x in altered1]
-
-	if(measures2[msr].keySignature == None):
-
-		measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 2)
-		altered2 = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
-		altered2 = [x.name for x in altered2]
-	else:
-
-		altered2 = measures2[msr].keySignature.alteredPitches
-		altered2 = [x.name for x in altered2]
-
-	naturals = set()
-        for index in range(0, len(notes1)):
-
-        	if(notes1[index].isChord):
-
-			for pitch in notes1[index].pitches:
-				
-				if(not pitch.accidental is None and not pitch.name in altered1):
-
-					accidentals1.append(pitch.accidental)
-					
-					if(pitch.accidental.name == 'natural'):
-						
-						naturals.add(pitch.name)
-
-				elif(pitch.name in altered1 and pitch.name[0] in naturals):
-
-					accidentals1.append(pitch.accidental)
-					naturals.dicard(pitch.name)
-
-		elif(not notes1[index].accidental is None and not notes1[index].name in altered1):
-
-			accidentals1.append(notes1[index].accidental)
-
-			if(notes1[index].accidental.name == 'natural'):
-
-				naturals.add(notes1[index].name)
-
-		elif(notes1[index].name in altered1 and notes1[index].name[0] in naturals):
-
-			accidentals1.append(notes1[index].accidental)
-			naturals.discard(notes1[index].name)
         
-	naturals.clear() 
-	
-	for index in range(0, len(notes2)):
-
-		if(notes2[index].isChord):
-
-			for pitch in notes2[index].pitches:
-
-				if(not pitch.accidental is None and not pitch.name in altered2):
-
-					accidentals2.append(pitch.accidental)
-
-					if(pitch.accidental.name == 'natural'):
-
-						naturals.add(pitch.name)
-
-				elif(pitch.name in altered2 and pitch.name[0] in naturals):
-
-					accidentals2.append(pitch.accidental)
-					naturals.discard(pitch.name)
-
-		elif(not notes2[index].accidental is None and not notes2[index].name in altered2):
-
-			accidentals2.append(notes2[index].accidental)
-
-			if(notes2[index].accidental.name == 'natural'):
-
-				naturals.add(notes2[index].name)
-
-		elif(notes2[index].name in altered2 and notes2[index].name[0] in naturals):
-
-			accidentals2.append(notes2[index].accidental)
-			naturals.discard(notes2[index].name)
+	accidentals1 = self.__get_accidentals__(msr,part,1)
+	accidentals2 = self.__get_accidentals__(msr,part,2)
 
 	logging.debug("accidentals1: " +str([x.name for x in accidentals1]))
 	logging.debug("accidentals2: " +str([x.name for x in accidentals2]))
 	return accidentals1 == accidentals2
 
+
+
+    def __get_accidentals__(self, msr, part, score_number):
+        """A helper function for the have_same_accidentals fuction
+	
+	Args:
+	  msr (int): measure at which the accidentals should be collected
+
+	  part (int): the part number for which the score should be analyzed
+
+	  score_number (int):  A score number so the function knows which score to analyze
+
+	Returns:
+	  list:  The collected accidentals
+
+	"""
+	if(score_number == 1):
+
+		measures = self.score1.parts[part].getElementsByClass('Measure')
+		notes = measures[msr].flat.notes
+
+		if(measures[msr].keySignature == None):
+
+			measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 1)
+			altered = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
+			altered = [x.name for x in altered]
+
+		else:
+
+			altered = measures[msr].keySignature.alteredPitches
+			altered = [x.name for x in altered]
+		
+	elif(score_number == 2):
+
+		measures = self.score2.parts[part].getElementsByClass('Measure')
+		notes = measures[msr].flat.notes
+
+		if(measures[msr].keySignature == None):
+
+			measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 2)
+			altered = self.score2.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
+			altered = [x.name for x in altered]
+
+		else:
+
+			altered = measures[msr].keySignature.alteredPitches
+			altered = [x.name for x in altered]
+
+	naturals = set()
+	accidentals = []
+	
+	for index in range(0, len(notes)):
+
+		if(notes[index].isChord):
+
+			for pitch in notes[index].pitches:
+
+				if(not pitch.accidental is None and not pitch.name in altered):
+
+					accidentals.append(pitch.accidental)
+
+					if(pitch.accidental.name == 'natural'):
+
+						naturals.add(pitch.name)
+
+				elif(pitch.name in altered and pitch.name[0] in naturals):
+
+					accidentals.append(pitch.accidental)
+					naturals.discard(pitch.name)
+		
+		elif(not notes[index].accidental is None and not notes[index].name in altered):
+
+			accidentals.append(notes[index].accidental)
+
+			if(notes[index].accidental.name == 'natural'):
+
+				naturals.add(notes[index].name)
+
+		elif(notes[index].name in altered and notes[index].name[0] in naturals):
+
+			accidentals.append(notes[index].accidental)
+			naturals.discard(notes[index].name)
+				
+	
+	return accidentals
 
     def __get_most_recent_key__(self, msr=0, part=0, score_number=1):
         """Gets the measure number of the most recent key change
