@@ -44,7 +44,8 @@ class ScoreDiff:
 
 
 	"""        
-	music21.environment.set('localCorpusPath', localCorpusPath)
+
+        music21.environment.set('localCorpusPath', localCorpusPath)
         self.score1 = base.parse(score1)
        	self.score2 = base.parse(score2)
         self.name1 = score1
@@ -288,7 +289,8 @@ class ScoreDiff:
         """
 
         self.__verify_part_and_measure__(msr, part)
-	measures1 = self.score1.parts[part].getElementsByClass('Measure')
+
+        measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
         clef1 = measures1[msr].clef
         clef2 = measures2[msr].clef
@@ -367,6 +369,7 @@ class ScoreDiff:
        
 
         """
+
 
         self.__verify_part_and_measure__(msr, part)
         measures1 = self.score1.parts[part].getElementsByClass('Measure')
@@ -665,7 +668,8 @@ class ScoreDiff:
         """
 
 	self.__verify_part_and_measure__(msr, part)
-	measures1 = self.score1.parts[part].getElementsByClass('Measure')
+
+        measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
         time_signature1 = measures1[msr].timeSignature
         time_signature2 = measures2[msr].timeSignature
