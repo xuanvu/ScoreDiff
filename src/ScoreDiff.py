@@ -1,6 +1,6 @@
 """
 
-.. module:: ScoreDiff
+.. module:: scorediff
     :synopsis: A module for comparing two musicxml files and displaying the differences
 
 ..  moduleauthor:: Julien Dubeau <jdubeau@dons.usfca.edu>
@@ -15,7 +15,6 @@ logging.basicConfig(filename='debug.log', level = logging.DEBUG)
 #To enable debug output, comment out the following line
 logging.disable(logging.DEBUG)
 
-
 class ScoreDiff:
     """The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
     to the initialization function, so that the user can detect and display certain differences.
@@ -23,7 +22,7 @@ class ScoreDiff:
     """
     
     #This ornaments list is used as a reference when comparing ornaments    
-    ornaments = ['Appoggiatura', 'GeneralAppoggiatura', 'GeneralMordent', 'HalfStepAppoggiatura',
+    ORNAMENTS = ['Appoggiatura', 'GeneralAppoggiatura', 'GeneralMordent', 'HalfStepAppoggiatura',
                  'HalfSetpInvertedAppoggiatura', 'HalfStepInvertedMordent', 'HalfStepMordent', 'HalfStepTrill',
                  'InvertedAppoggiatura', 'InvertedMordent', 'InvertedTurn', 'Mordent', 'Schleifer', 'Shake',
                  'Tremolo', 'Trill', 'Turn', 'WholeStepAppoggiatura', 'WholeStepInvertedAppoggiatura',
@@ -65,7 +64,8 @@ class ScoreDiff:
         partial2.show()
 
     def have_same_accidentals(self, msr=0, part=0):
-        """Checks if the two scores both have the same accidentals at the specified measure and for the specified part
+        """Checks if the two scores both have the same accidentals at the 
+	specified measure and for the specified part
 
 	Kwargs:
 	  msr (int): the measure number at which to make the comparison
@@ -83,9 +83,7 @@ class ScoreDiff:
 	
 	
 	"""
-
 	self.__verify_part_and_measure__(msr, part)
-
         
 	accidentals1 = self.__get_accidentals__(msr,part,1)
 	accidentals2 = self.__get_accidentals__(msr,part,2)
@@ -93,8 +91,6 @@ class ScoreDiff:
 	logging.debug("accidentals1: " +str([x.name for x in accidentals1]))
 	logging.debug("accidentals2: " +str([x.name for x in accidentals2]))
 	return accidentals1 == accidentals2
-
-
 
     def __get_accidentals__(self, msr, part, score_number):
         """A helper function for the have_same_accidentals fuction
@@ -176,8 +172,7 @@ class ScoreDiff:
 
 			accidentals.append(notes[index].accidental)
 			naturals.discard(notes[index].name)
-				
-	
+					
 	return accidentals
 
     def __get_most_recent_key__(self, msr=0, part=0, score_number=1):
@@ -216,7 +211,8 @@ class ScoreDiff:
 	return current	
 
     def have_same_articulations(self, msr=0, part=0):
-        """Checks if the two scores both have the same articulations at the specified measure and for the specified part [#f2]_
+        """Checks if the two scores both have the same articulations 
+	at the specified measure and for the specified part [#f2]_
 	
 	Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -255,7 +251,8 @@ class ScoreDiff:
         return articulations1 == articulations2
 
     def have_same_clef_markings(self, msr=0, part=0):
-        """Checks if the two scores both have the same clef markings at the specified measure and for the specified part
+        """Checks if the two scores both have the same clef markings 
+	at the specified measure and for the specified part
 
         Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -292,7 +289,6 @@ class ScoreDiff:
 	logging.debug("clef2.sign: " + str(clef2.sign))
 	return clef1.sign == clef2.sign
     
-
     def __get_most_recent_clef__(self, msr=0, part=0, score_number=1):
         """Gets the measure number of the most recent clef change
 	
@@ -332,7 +328,8 @@ class ScoreDiff:
 
 
     def have_same_key_signature(self, msr=0, part=0):
-        """Checks if the two scores both have the same key signature at the specified measure and for the specified part
+        """Checks if the two scores both have the same key signature 
+	at the specified measure and for the specified part
 
         Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -434,7 +431,8 @@ class ScoreDiff:
     def have_same_pitches(self, msr=0, part=0):
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
 	
-	.. note:: This function will compares pitches in the order that they occur.  To compare without considering order, use have_same_pitches_ignore_order.
+	.. note:: This function will compares pitches in the order that they occur.  
+	To compare without considering order, use have_same_pitches_ignore_order.
 
         
 	Kwargs:
@@ -496,7 +494,8 @@ class ScoreDiff:
 
 
     def have_same_spanners(self, msr=0, part=0):
-        """Checks if the two scores both have the same spanner sites at the specified measure and for the specified part [#f1]_
+        """Checks if the two scores both have the same spanner 
+	sites at the specified measure and for the specified part [#f1]_
 	
 	Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -553,7 +552,8 @@ class ScoreDiff:
 
 
     def have_same_stem_directions(self, msr=0, part=0):
-        """Checks if the two scores both have the same stem directions at the specified measure and for the specified part
+        """Checks if the two scores both have the same stem 
+	directions at the specified measure and for the specified part
 
         Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -619,7 +619,8 @@ class ScoreDiff:
       
    	
     def have_same_time_signature(self, msr=0, part=0):
-        """Checks if the two scores both have the same time signature at the specified measure and for the specified part
+        """Checks if the two scores both have the same time 
+	signature at the specified measure and for the specified part
 
         Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -701,7 +702,8 @@ class ScoreDiff:
 
               
     def __verify_part_and_measure__(self, msr, part):
-        """Checks to make sure the part and measure numbers a user has entered are not outside of the range that exists for either score
+        """Checks to make sure the part and measure numbers a user has entered are 
+	not outside of the range that exists for either score
 
         Args:
           part (int): The part number to check
@@ -716,11 +718,11 @@ class ScoreDiff:
 
 	if (msr >= len(self.score1.parts[part].getElementsByClass('Measure').elements) or msr < 0):
 
-		raise ScoreException("measure number "+str(msr) + "does not exist for "+self.name1)
+		raise MeasureRangeError("measure number "+str(msr) + " does not exist for "+self.name1)
 	
 	if (msr >= len(self.score2.parts[part].getElementsByClass('Measure').elements) or msr < 0):
 		
-		raise ScoreException("measure number "+str(msr) + "does not exist for "+self.name2)
+		raise MeasureRangeError("measure number "+str(msr) + " does not exist for "+self.name2)
 
 
     def __verify_part__(self, part):
@@ -735,20 +737,20 @@ class ScoreDiff:
 	"""
 	if (part >= len(self.score1.parts) or part < 0):
 
-        	raise ScoreException("part number " + str(part) + " does not exist for " + self.name1)
+        	raise PartRangeError("part number " + str(part) + " does not exist for " + self.name1)
 
         if (part >= len(self.score2.parts) or part < 0):
 
-        	raise ScoreException("part number " + str(part) + " does not exist for " + self.name2)
+        	raise PartRangeError("part number " + str(part) + " does not exist for " + self.name2)
 
 
-class ScoreException(Exception):
-	"""Class for handling exceptions while using the ScoreDiff tool
+class RangeError(Exception):
+	"""Class for handling range erros while using the ScoreDiff tool
 
 
 	"""
         def __init__(self , value):
-		"""Initializes the ScoreException object
+		"""Initializes the RangeError object
 
 		Args:
 		 value (str): An error message
@@ -763,6 +765,54 @@ class ScoreException(Exception):
 
 		"""
 		return repr(self.value)
+
+class MeasureRangeError(RangeError):
+	"""Class used for handling measure out of range errors
+
+	"""
+	def __init__(self, value):
+		"""Initializes the MeasureRangeError object
+
+		Args:
+		  value (str): An error message
+
+		"""
+
+		self.value = value
+
+	def __str__(self):
+		"""Function for fetching this object's error message"
+
+		Returns:
+		  This object's error message
+
+		"""
+		return repr(self.value)
+
+
+class PartRangeError(RangeError):
+	"""Exception raised when user enters a part number that is out
+	of range
+	
+	"""
+	def __init__(self, value):
+		"""Initializes the PartRangeError object
+
+		Args:
+		  value (str): An error message
+
+		"""
+		self.value = value
+
+	def __str__(self):
+		"""Function for fetching this object's error message
+
+		Returns:
+		  This object's error message
+
+		"""
+		return repr(self.value)
+
 
 """
 
