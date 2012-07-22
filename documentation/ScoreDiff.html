@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>ScoreDiff Documentation &mdash; ScoreDiff 0.0.1 documentation</title>
+    <title>ScoreDiff Documentation &mdash; scorediff 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
-    <link rel="top" title="ScoreDiff 0.0.1 documentation" href="index.html" />
+    <link rel="top" title="scorediff 0.0.1 documentation" href="index.html" />
     <link rel="prev" title="About This Project" href="about.html" /> 
   </head>
   <body>
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="about.html" title="About This Project"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">ScoreDiff 0.0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">scorediff 0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -51,16 +51,35 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-ScoreDiff">
-<span id="scorediff-documentation"></span><h1>ScoreDiff Documentation<a class="headerlink" href="#module-ScoreDiff" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-ScoreDiff"></span><dl class="class">
-<dt id="ScoreDiff.ScoreDiff">
-<em class="property">class </em><tt class="descclassname">ScoreDiff.</tt><tt class="descname">ScoreDiff</tt><big>(</big><em>score1</em>, <em>score2</em>, <em>localCorpusPath='.'</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff" title="Permalink to this definition">¶</a></dt>
+  <div class="section" id="module-scorediff">
+<span id="scorediff-documentation"></span><h1>ScoreDiff Documentation<a class="headerlink" href="#module-scorediff" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-scorediff"></span><dl class="exception">
+<dt id="scorediff.MeasureRangeError">
+<em class="property">exception </em><tt class="descclassname">scorediff.</tt><tt class="descname">MeasureRangeError</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#scorediff.MeasureRangeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class used for handling measure out of range errors</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="scorediff.PartRangeError">
+<em class="property">exception </em><tt class="descclassname">scorediff.</tt><tt class="descname">PartRangeError</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#scorediff.PartRangeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception raised when user enters a part number that is out
+of range</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="scorediff.RangeError">
+<em class="property">exception </em><tt class="descclassname">scorediff.</tt><tt class="descname">RangeError</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#scorediff.RangeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for handling range erros while using the ScoreDiff tool</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="scorediff.ScoreDiff">
+<em class="property">class </em><tt class="descclassname">scorediff.</tt><tt class="descname">ScoreDiff</tt><big>(</big><em>score1</em>, <em>score2</em>, <em>localCorpusPath='.'</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
 to the initialization function, so that the user can detect and display certain differences.</p>
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.display">
-<tt class="descname">display</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.display" title="Permalink to this definition">¶</a></dt>
+<dt id="scorediff.ScoreDiff.display">
+<tt class="descname">display</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.display" title="Permalink to this definition">¶</a></dt>
 <dd><p>Useful for displaying the differences between the two scores visually</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
@@ -71,29 +90,32 @@ to the initialization function, so that the user can detect and display certain 
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_accidentals">
-<tt class="descname">have_same_accidentals</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_accidentals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same accidentals at the specified measure and for the specified part</p>
+<dt id="scorediff.ScoreDiff.have_same_accidentals">
+<tt class="descname">have_same_accidentals</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_accidentals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same accidentals at the 
+specified measure and for the specified part</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
-<dd><p class="first">msr (int):  the measure number at which to make the comparison</p>
+<dd><p class="first">msr (int): the measure number at which to make the comparison</p>
 <p class="last">part (int): the part for which to make the comparison</p>
 </dd>
-<dt>Returns:</dt>
-<dd><p class="first">boolean.   The result of the comparison:</p>
-<div class="last highlight-python"><pre>True -- The scores have the same accidentals
+</dl>
+<p>Returns:
+boolean. The result of the comparison:</p>
+<div class="highlight-python"><pre>True -- The scores have the same accidentals
 False -- The scores do not have the same accidentals</pre>
 </div>
-</dd>
+<dl class="docutils">
 <dt>Raises:</dt>
 <dd>ScoreException</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_articulations">
-<tt class="descname">have_same_articulations</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_articulations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same articulations at the specified measure and for the specified part <a class="footnote-reference" href="#f2" id="id1">[2]</a></p>
+<dt id="scorediff.ScoreDiff.have_same_articulations">
+<tt class="descname">have_same_articulations</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_articulations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same articulations 
+at the specified measure and for the specified part <a class="footnote-reference" href="#f2" id="id1">[2]</a></p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd><p class="first">msr (int):  the measure number at which to make the comparison</p>
@@ -111,9 +133,10 @@ False -- The scores do not have the same articulations</pre>
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_clef_markings">
-<tt class="descname">have_same_clef_markings</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_clef_markings" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same clef markings at the specified measure and for the specified part</p>
+<dt id="scorediff.ScoreDiff.have_same_clef_markings">
+<tt class="descname">have_same_clef_markings</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_clef_markings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same clef markings 
+at the specified measure and for the specified part</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd><p class="first">msr (int):  the measure number at which to make the comparison</p>
@@ -131,9 +154,10 @@ False -- The scores do not have the same clef markings</pre>
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_key_signature">
-<tt class="descname">have_same_key_signature</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_key_signature" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same key signature at the specified measure and for the specified part</p>
+<dt id="scorediff.ScoreDiff.have_same_key_signature">
+<tt class="descname">have_same_key_signature</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_key_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same key signature 
+at the specified measure and for the specified part</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd><p class="first">msr (int):  the measure number at which to make the comparison</p>
@@ -151,8 +175,8 @@ False -- The scores do not have the same key</pre>
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_ornaments">
-<tt class="descname">have_same_ornaments</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_ornaments" title="Permalink to this definition">¶</a></dt>
+<dt id="scorediff.ScoreDiff.have_same_ornaments">
+<tt class="descname">have_same_ornaments</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_ornaments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the two scores both have the same ornaments at the specified measure and for the specified part</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
@@ -171,12 +195,13 @@ False -- The scores do not have the same ornaments</pre>
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_pitches">
-<tt class="descname">have_same_pitches</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_pitches" title="Permalink to this definition">¶</a></dt>
+<dt id="scorediff.ScoreDiff.have_same_pitches">
+<tt class="descname">have_same_pitches</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_pitches" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the two scores both have the same pitches at the specified measure and for the specified part</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This function will compares pitches in the order that they occur.  To compare without considering order, use have_same_pitches_ignore_order.</p>
+<p class="last">This function will compares pitches in the order that they occur.  
+To compare without considering order, use have_same_pitches_ignore_order.</p>
 </div>
 <dl class="docutils">
 <dt>Kwargs:</dt>
@@ -195,8 +220,8 @@ False -- The scores do not have the same pitches</pre>
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_pitches_ignore_order">
-<tt class="descname">have_same_pitches_ignore_order</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_pitches_ignore_order" title="Permalink to this definition">¶</a></dt>
+<dt id="scorediff.ScoreDiff.have_same_pitches_ignore_order">
+<tt class="descname">have_same_pitches_ignore_order</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_pitches_ignore_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the two scores both have the same pitches at the specified measure and for the specified part</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -219,9 +244,10 @@ False -- The scores do not have the same pitches</pre>
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_spanners">
-<tt class="descname">have_same_spanners</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_spanners" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same spanner sites at the specified measure and for the specified part <a class="footnote-reference" href="#f1" id="id2">[1]</a></p>
+<dt id="scorediff.ScoreDiff.have_same_spanners">
+<tt class="descname">have_same_spanners</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_spanners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same spanner 
+sites at the specified measure and for the specified part <a class="footnote-reference" href="#f1" id="id2">[1]</a></p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd><p class="first">msr (int):  the measure number at which to make the comparison</p>
@@ -239,9 +265,10 @@ False -- The scores do not have the same spanners</pre>
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_stem_directions">
-<tt class="descname">have_same_stem_directions</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_stem_directions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same stem directions at the specified measure and for the specified part</p>
+<dt id="scorediff.ScoreDiff.have_same_stem_directions">
+<tt class="descname">have_same_stem_directions</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_stem_directions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same stem 
+directions at the specified measure and for the specified part</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd><p class="first">msr (int):  the measure number at which to make the comparison</p>
@@ -259,9 +286,10 @@ False -- The scores do not have the same stem directions</pre>
 </dd></dl>
 
 <dl class="method">
-<dt id="ScoreDiff.ScoreDiff.have_same_time_signature">
-<tt class="descname">have_same_time_signature</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_time_signature" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same time signature at the specified measure and for the specified part</p>
+<dt id="scorediff.ScoreDiff.have_same_time_signature">
+<tt class="descname">have_same_time_signature</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#scorediff.ScoreDiff.have_same_time_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same time 
+signature at the specified measure and for the specified part</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd><p class="first">msr (int):  the measure number at which to make the comparison</p>
@@ -278,12 +306,6 @@ False -- The scores do not have the same time signature</pre>
 </dl>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="exception">
-<dt id="ScoreDiff.ScoreException">
-<em class="property">exception </em><tt class="descclassname">ScoreDiff.</tt><tt class="descname">ScoreException</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class for handling exceptions while using the ScoreDiff tool</p>
 </dd></dl>
 
 <p class="rubric">Footnotes</p>
@@ -344,7 +366,7 @@ False -- The scores do not have the same time signature</pre>
         <li class="right" >
           <a href="about.html" title="About This Project"
              >previous</a> |</li>
-        <li><a href="index.html">ScoreDiff 0.0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">scorediff 0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

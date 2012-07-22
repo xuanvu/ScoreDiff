@@ -1,7 +1,7 @@
 ScoreDiff Documentation
 ************************
 
-.. automodule:: ScoreDiff
+.. automodule:: scorediff
    :members:
 
 .. rubric:: Footnotes
