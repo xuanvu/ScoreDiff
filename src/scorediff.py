@@ -343,8 +343,7 @@ class ScoreDiff:
 	    if(clef.measureNumber > current and clef.measureNumber <= target_measure):
 
 	        current = clef.measureNumber
-	
-	
+		
 	logging.debug("most recent clef found: " + str(current))
 	return current
 

@@ -56,14 +56,13 @@
 <span class="target" id="module-scorediff"></span><dl class="exception">
 <dt id="scorediff.MeasureRangeError">
 <em class="property">exception </em><tt class="descclassname">scorediff.</tt><tt class="descname">MeasureRangeError</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#scorediff.MeasureRangeError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class used for handling measure out of range errors</p>
+<dd><p>Exception raised when user enters a measure number that is out of range</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="scorediff.PartRangeError">
 <em class="property">exception </em><tt class="descclassname">scorediff.</tt><tt class="descname">PartRangeError</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#scorediff.PartRangeError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exception raised when user enters a part number that is out
-of range</p>
+<dd><p>Exception raised when user enters a part number that is out of range</p>
 </dd></dl>
 
 <dl class="exception">
@@ -200,7 +199,7 @@ False -- The scores do not have the same ornaments</pre>
 <dd><p>Checks if the two scores both have the same pitches at the specified measure and for the specified part</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This function will compares pitches in the order that they occur.  
+<p class="last">This function will compare pitches in the order that they occur.  
 To compare without considering order, use have_same_pitches_ignore_order.</p>
 </div>
 <dl class="docutils">
