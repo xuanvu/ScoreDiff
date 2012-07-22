@@ -405,7 +405,7 @@ class ScoreDiff:
 		    
 		for third_index in range(0, len(classes)):
 
-			if(classes[third_index] in ScoreDiff.ornaments):
+			if(classes[third_index] in ScoreDiff.ORNAMENTS):
                     
                     		ornaments1.append(classes[third_index])
                 
@@ -419,7 +419,7 @@ class ScoreDiff:
 
 		for third_index in range(0, len(classes)):
 		    
-			if(classes[third_index] in ScoreDiff.ornaments):
+			if(classes[third_index] in ScoreDiff.ORNAMENTS):
                         
                         	ornaments2.append(classes[third_index])
                 
@@ -760,6 +760,7 @@ class RangeError(Exception):
 
 	def __str__(self):
 		"""Function for fetching this object's error message
+		
 		Returns:
 		 This object's error message
 
