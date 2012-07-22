@@ -67,21 +67,23 @@ class ScoreDiff:
     def have_same_accidentals(self, msr=0, part=0):
         """Checks if the two scores both have the same accidentals at the specified measure and for the specified part
 
-        Kwargs:
-          msr (int):  the measure number at which to make the comparison
-          
+	Kwargs:
+	  msr (int): the measure number at which to make the comparison
+	
 	  part (int): the part for which to make the comparison
 
-        Returns:
-           boolean.   The result of the comparison::
+	Returns:
+	boolean. The result of the comparison::
 
-            True -- The scores have the same accidentals
-            False -- The scores do not have the same accidentals
+	 True -- The scores have the same accidentals
+	 False -- The scores do not have the same accidentals
 
-        Raises:
-          ScoreException
-       
-        """
+	Raises:
+	  ScoreException
+	
+	
+	"""
+
 	self.__verify_part_and_measure__(msr, part)
 
         measures1 = self.score1.parts[part].getElementsByClass('Measure')
@@ -92,23 +94,23 @@ class ScoreDiff:
 	accidentals2 = []
 
 	if(measures1[msr].keySignature == None):
-		
+
 		measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 1)
 		altered1 = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
 		altered1 = [x.name for x in altered1]
-		
+
 	else:
 
 		altered1 = measures1[msr].keySignature.alteredPitches
 		altered1 = [x.name for x in altered1]
 
 	if(measures2[msr].keySignature == None):
-		
+
 		measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 2)
 		altered2 = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
 		altered2 = [x.name for x in altered2]
 	else:
-		
+
 		altered2 = measures2[msr].keySignature.alteredPitches
 		altered2 = [x.name for x in altered2]
 
@@ -125,12 +127,12 @@ class ScoreDiff:
 		elif(not notes1[index].accidental is None and not notes1[index].name in altered1):
 
 			accidentals1.append(notes1[index].accidental)
-            		
+            
 	for index in range(0, len(notes2)):
-		
+
 		if(notes2[index].isChord):
 
-			for  pitch in notes2[index].pitches:
+			for pitch in notes2[index].pitches:
 
 				if(not pitch.accidental is None and not pitch.name in altered2):
 
@@ -139,10 +141,11 @@ class ScoreDiff:
 		elif(not notes2[index].accidental is None and not notes2[index].name in altered2):
 
 			accidentals2.append(notes2[index].accidental)
-	
-	logging.debug("accidentals1: " +str([x.name for x in accidentals1])) 
+
+	logging.debug("accidentals1: " +str([x.name for x in accidentals1]))
 	logging.debug("accidentals2: " +str([x.name for x in accidentals2]))
 	return accidentals1 == accidentals2
+
 
     def __get_most_recent_key__(self, msr=0, part=0, score_number=1):
         """Gets the measure number of the most recent key change
@@ -547,12 +550,15 @@ class ScoreDiff:
 
 		if(notes1[index].isChord):
 
+			temp = []
+
 			for pitch in notes1[index].pitches:
 
-				stems1+=[notes1[index].getStemDirection(pitch)]
+				temp+=[notes1[index].getStemDirection(pitch)]
 
-			stems1 = list(set(stems1))
-			
+			stems1+=list(set(temp))
+
+						
 		else:
 
 			stems1+=[notes1[index].stemDirection]
@@ -561,12 +567,15 @@ class ScoreDiff:
 			
 		if(notes2[index].isChord):
 
+			temp = []
+
 			for pitch in notes2[index].pitches:
 
-				stems2+=[notes2[index].getStemDirection(pitch)]
+				temp+=[notes2[index].getStemDirection(pitch)]
 
-			stems2 = list(set(stems2))
+			stems2 += list(set(temp))
 
+			
 		else:
 
 			stems2+=[notes2[index].stemDirection]
