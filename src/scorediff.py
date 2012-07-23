@@ -616,7 +616,7 @@ class ScoreDiff:
 
 		    temp.add(notes1[index].getStemDirection(pitch))
 
-		    stems1+=list(temp)
+		stems1 += list(temp)
 
 						
 	    else:
@@ -633,12 +633,12 @@ class ScoreDiff:
 
 		    temp.add(notes2[index].getStemDirection(pitch))
 
-		    stems2 += list(temp)
+		stems2 += list(temp)
 
 			
             else:
 
-                stems2+=[notes2[index].stemDirection]
+                stems2 += [notes2[index].stemDirection]
 	
 	logging.debug("stems1: " + str(stems1))
 	logging.debug("stems2: " + str(stems2))
