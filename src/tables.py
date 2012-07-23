@@ -16,7 +16,7 @@ class Index:
     """
 
     def __init__(self, score):
-        """Initializes an empty Table
+        """sets this object's score to the score passed in
 
 	Args:
 	  score (music21.stream.Score):  A music21 score object to analyze
@@ -25,14 +25,18 @@ class Index:
         	
         self.score = score
 
+
     def build_clef(self, part):
         """Returns a dictionary of (measure, clef) pairs based on score passed to __init__
 	        
 	Args:
 	  part (music21.stream.Part):  A music21 part object to restrict
 	  the building to only one part of the score
+        
+	Returns:
+	  dictionary.
 
-	"""
+        """
 	
         temp = dict()
 	measures = self.score.parts[part].getElementsByClass('Measure')
@@ -50,8 +54,12 @@ class Index:
 
 	return temp
 
+
     def build_all_clefs(self):
         """Returns a dictionary of dictionaries of (measure, clef) pairs based on score passed to __init__
+        
+	Returns:
+	  dictionary
 
 	"""
 
@@ -64,13 +72,15 @@ class Index:
 	return temp
 
 
-
     def build_times(self, part):
         """Returns a dictionary of (measure, timesignature) pairs based on score passed to __init__
 
 	Args:
 	  part (music21.stream.Part):  A music21 part object to restrict
 	  the building to only one part of the score
+
+	Returns:
+	  dictionary
 
 	"""
 
@@ -90,9 +100,13 @@ class Index:
 
 	return temp
 
+
     def build_all_times(self):
         """Returns a dictionary of dictionaries of (measure, timesignature) pairs based on all
 	parts in the score
+        
+	Returns:
+	  dictionary
 
 	"""
 
@@ -107,6 +121,13 @@ class Index:
 
     def build_keys(self, part):
         """Returns a dictionary of (measure, keysignature) pairs based on score passed to __init__
+        
+	Args:
+	  part (music21.stream.Part):  A music21 part object to restrict the building
+	  to only part of the score
+
+	Returns:
+	  dictionary
 
 	"""
 
@@ -126,9 +147,13 @@ class Index:
 
 	return temp
 
+
     def build_all_keys(self):
         """Returns a dictionary of dictionaries of (measure, keysignature) pairs based on all
 	parts in the score
+
+	Returns:
+	  dictionary
 
 	"""
 
@@ -139,6 +164,7 @@ class Index:
 	    temp.update({i:self.build_keys(i)})
 
 	return temp
+
 
     def build(self):
         """Returns a dictionary of dictionaries of dictionaries.  These include all
