@@ -289,15 +289,15 @@ class ScoreDiff:
 
 	if(key_signature1 == 'atonal' and not key_signature2 == 'atonal' or
 			key_signature2 == 'atonal' and not key_signature1 == 'atonal'):
-
+            
 	    return False
 
         if(key_signature1 == 'atonal' and key_signature2 == 'atonal'):
 
 	    return True
         		
-	logging.debug("key signature 1.sharps: "+str(key_signature1.sharps))
-	logging.debug("key signature 2.sharpts: "+str(key_signature2.sharps))
+	logging.debug("key signature1.sharps: "+str(key_signature1.sharps))
+	logging.debug("key signature2.sharps: "+str(key_signature2.sharps))
 	return key_signature1.sharps == key_signature2.sharps
 
 
