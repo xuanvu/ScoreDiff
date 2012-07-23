@@ -124,13 +124,27 @@ class ScoreDiff:
 
 	    measures = self.score1.parts[part].getElementsByClass('Measure')
 	    notes = measures[msr].flat.notes
-            altered = [x.name for x in self.index1['key'][part][msr].alteredPitches]
+
+            if(self.index1['key'][part][msr] == 'atonal'):
+
+	        altered = []
+
+	    else:
+
+                altered = [x.name for x in self.index1['key'][part][msr].alteredPitches]
 	   	    
         elif(score_number == 2):
 
             measures = self.score2.parts[part].getElementsByClass('Measure')
             notes = measures[msr].flat.notes
-            altered = [x.name for x in self.index2['key'][part][msr].alteredPitches]
+
+            if(self.index2['key'][part][msr] == 'atonal'):
+
+	        altered = []
+            
+	    else:
+		    
+	        altered = [x.name for x in self.index2['key'][part][msr].alteredPitches]
                            
         naturals = set()
         accidentals = []
