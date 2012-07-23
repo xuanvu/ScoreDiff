@@ -10,7 +10,7 @@
 """
 
 class Index:
-    """The ClefTable class builds a dictionary of (measure, clef) pairs
+    """The Index class builds a variety of dictionaries
     for convenient lookup
 
     """
@@ -141,10 +141,10 @@ class Index:
 	return temp
 
     def build(self):
-        """Returns a dictionary of (type, (part, (measure, object))) pairs where
-	type is one of: clef, keysignature, timesignature, and object is an object
-	of one of these types
-
+        """Returns a dictionary of dictionaries of dictionaries.  These include all
+	of the data that can be obtained from the other methods in this class,
+	stored as {'clef':{clefmap}, 'key:{keymap}', 'time:{timemap}'}
+	
 	Returns:
 	  dictionary.  A dictionary of the form described above
 
