@@ -10,7 +10,7 @@
 """
 
 class Index:
-    """The Index class builds a variety of dictionaries
+    """The Index class builds a variety of tables
     for convenient lookup
 
     """
@@ -27,18 +27,18 @@ class Index:
 
 
     def build_clef(self, part):
-        """Returns a dictionary of (measure, clef) pairs based on score passed to __init__
+        """Returns a list of clef objects based on score passed to __init__
 	        
 	Args:
 	  part (music21.stream.Part):  A music21 part object to restrict
 	  the building to only one part of the score
         
 	Returns:
-	  dictionary.
+	  list.
 
         """
 	
-        temp = dict()
+        temp = list()
 	measures = self.score.parts[part].getElementsByClass('Measure')
         
 	for index, measure in enumerate(measures):
@@ -46,45 +46,46 @@ class Index:
 	    if(measure.clef is not None):
 
                 recent_clef = measure.clef
-		temp.update({index:measure.clef})
+		temp.append(measure.clef)
 
-	    else:
+            else:
 
-		temp.update({index:recent_clef})
+		temp.append(recent_clef)
 
 	return temp
 
 
     def build_all_clefs(self):
-        """Returns a dictionary of dictionaries of (measure, clef) pairs based on score passed to __init__
+        """Returns a list of lists of clef objects based on score passed to __init__
+	A list of clefs can be accessed for a given part via list[part_index]
         
 	Returns:
-	  dictionary
+	  list
 
 	"""
 
-	temp = dict()
+	temp = list(list())
 
         for i in range(0, len(self.score.parts.elements)):
 
-	    temp.update({i:self.build_clef(i)})
+	    temp.append(self.build_clef(i))
 
 	return temp
 
 
     def build_times(self, part):
-        """Returns a dictionary of (measure, timesignature) pairs based on score passed to __init__
+        """Returns a list of timesignature objects based on score passed to __init__
 
 	Args:
 	  part (music21.stream.Part):  A music21 part object to restrict
 	  the building to only one part of the score
 
 	Returns:
-	  dictionary
+	  list
 
 	"""
 
-	temp = dict()
+	temp = list()
 	measures = self.score.parts[part].getElementsByClass('Measure')
 
 	for index, measure in enumerate(measures):
@@ -92,91 +93,92 @@ class Index:
 	    if(measure.timeSignature is not None):
 
 	        recent_time = measure.timeSignature
-		temp.update({index:measure.timeSignature})
+		temp.append(measure.timeSignature)
 
 	    else:
 
-	        temp.update({index:recent_time})
+	        temp.append(recent_time)
 
 	return temp
 
 
     def build_all_times(self):
-        """Returns a dictionary of dictionaries of (measure, timesignature) pairs based on all
-	parts in the score
+        """Returns a list of lists of timesignature objects based on all
+	parts in the score.  Access data for a given part with list[part_index]
         
 	Returns:
-	  dictionary
+	  list
 
 	"""
 
-	temp = dict()
+	temp = list(list())
 	
 	for i in range(0, len(self.score.parts.elements)):
 
-	    temp.update({i:self.build_times(i)})
+	    temp.append(self.build_times(i))
 
 	return temp
 
 
     def build_keys(self, part):
-        """Returns a dictionary of (measure, keysignature) pairs based on score passed to __init__
+        """Returns a list of keysignature objects based on score passed to __init__
         
 	Args:
 	  part (music21.stream.Part):  A music21 part object to restrict the building
 	  to only part of the score
 
 	Returns:
-	  dictionary
+	  list
 
 	"""
 
-	temp = dict()
+	temp = list()
 	measures = self.score.parts[part].getElementsByClass('Measure')
 	recent_key = 'atonal'
+
 	for index, measure in enumerate(measures):
 
 	    if(measure.keySignature is not None):
 
 	        recent_key = measure.keySignature
-		temp.update({index:measure.keySignature})
+		temp.append(measure.keySignature)
 
 	    else:
 
-	        temp.update({index:recent_key})
+	        temp.append(recent_key)
 
 	return temp
 
 
     def build_all_keys(self):
-        """Returns a dictionary of dictionaries of (measure, keysignature) pairs based on all
-	parts in the score
+        """Returns a list of lists of keysignature objects based on all
+	parts in the score.  Access data for a given part with list[part_index]
 
 	Returns:
-	  dictionary
+	  list
 
 	"""
 
-	temp = dict()
+	temp = list(list())
 
 	for i in range(0, len(self.score.parts.elements)):
 
-	    temp.update({i:self.build_keys(i)})
+	    temp.append(self.build_keys(i))
 
 	return temp
 
 
     def build(self):
-        """Returns a dictionary of dictionaries of dictionaries.  These include all
+        """Returns a dictionary of doubly nested lists.  These include all
 	of the data that can be obtained from the other methods in this class,
-	stored as {'clef':{clefmap}, 'key:{keymap}', 'time:{timemap}'}
+	stored as {'clef':{cleftable}, 'key:{keytable}', 'time:{timetable}'}
 	
 	Returns:
 	  dictionary.  A dictionary of the form described above
 
 	"""
 
-        index = dict(dict(dict()))
+        index = dict(list(list()))
 
 	index.update({'clef':self.build_all_clefs()})
 	index.update({'time':self.build_all_times()})
