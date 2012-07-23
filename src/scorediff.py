@@ -610,13 +610,13 @@ class ScoreDiff:
 
 	    if(notes1[index].isChord):
 
-	        temp = []
+	        temp = set()
 
 		for pitch in notes1[index].pitches:
 
-		    temp+=[notes1[index].getStemDirection(pitch)]
+		    temp.add(notes1[index].getStemDirection(pitch))
 
-		    stems1+=list(set(temp))
+		    stems1+=list(temp)
 
 						
 	    else:
@@ -627,13 +627,13 @@ class ScoreDiff:
 			
 	    if(notes2[index].isChord):
 
-	        temp = []
+	        temp = set()
 
 		for pitch in notes2[index].pitches:
 
-		    temp+=[notes2[index].getStemDirection(pitch)]
+		    temp.add(notes2[index].getStemDirection(pitch))
 
-		    stems2 += list(set(temp))
+		    stems2 += list(temp)
 
 			
             else:
