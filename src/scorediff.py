@@ -14,6 +14,7 @@ import logging
 logging.basicConfig(filename='debug.log', level = logging.DEBUG)
 #To enable debug output, comment out the following line
 logging.disable(logging.DEBUG)
+from tables import *
 
 class ScoreDiff:
     """The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
@@ -50,8 +51,10 @@ class ScoreDiff:
        	self.score2 = base.parse(score2)
         self.name1 = score1
         self.name2 = score2
+	self.clef_table1 = ClefTable(self.score1).build_all_parts()
+	self.clef_table2 = ClefTable(self.score2).build_all_parts()
 
-
+    
     def display(self, msr=0, part=0):
         """Useful for displaying the differences between the two scores visually
 
@@ -126,14 +129,12 @@ class ScoreDiff:
 	    if(measures[msr].keySignature == None):
 
                 measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 1)
-                altered = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
-                altered = [x.name for x in altered]
-
+                altered = [x.name for x in self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches]
+                
             else:
 
-                altered = measures[msr].keySignature.alteredPitches
-                altered = [x.name for x in altered]
-		
+                altered = [x.name for x in measures[msr].keySignature.alteredPitches]
+               		
         elif(score_number == 2):
 
             measures = self.score2.parts[part].getElementsByClass('Measure')
@@ -142,14 +143,12 @@ class ScoreDiff:
             if(measures[msr].keySignature == None):
 
                 measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 2)
-                altered = self.score2.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
-                altered = [x.name for x in altered]
-
+                altered = [x.name for x in self.score2.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches]
+                
             else:
 
-                altered = measures[msr].keySignature.alteredPitches
-                altered = [x.name for x in altered]
-
+                altered = [x.name for x in measures[msr].keySignature.alteredPitches]
+                
         naturals = set()
         accidentals = []
 	
@@ -292,60 +291,13 @@ class ScoreDiff:
 
         measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
-        clef1 = measures1[msr].clef
-        clef2 = measures2[msr].clef
-	
-	if(clef1 == None): 
-
-	    current = self.__get_most_recent_clef__(msr, part, 1)
-	    clef1 = self.score1.parts[part].measure(current).clef
-
-	if(clef2 == None):
-
-	    current = self.__get_most_recent_clef__(msr, part, 2)
-	    clef2 = self.score2.parts[part].measure(current).clef
-        	
+        clef1 = self.clef_table1[part][msr]
+        clef2 = self.clef_table2[part][msr]
+	        	
 	logging.debug("clef1.sign: " + str(clef1.sign))
 	logging.debug("clef2.sign: " + str(clef2.sign))
 	return clef1.sign == clef2.sign
     
-
-    def __get_most_recent_clef__(self, msr=0, part=0, score_number=1):
-        """Gets the measure number of the most recent clef change
-	
-	Kwargs:
-	  msr (int):  the measure number of the most recent clef change
-
-	  part (int): the part to examine
-
-	  score_number (int): A score number so the function knows which score to analyze
-
-	Returns:
-	  int.  The measure number of the most recent clef change
-
-
-	"""
-
-        if(score_number == 1):
-
-	    clefs = self.score1.parts[part].flat.getClefs()
-	    target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
-
-	elif(score_number == 2):
-
-	    clefs = self.score2.parts[part].flat.getClefs()
-	    target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
-
-	current = 0
-
-	for clef in clefs:
-
-	    if(clef.measureNumber > current and clef.measureNumber <= target_measure):
-
-	        current = clef.measureNumber
-		
-	logging.debug("most recent clef found: " + str(current))
-	return current
 
 
     def have_same_key_signature(self, msr=0, part=0):
