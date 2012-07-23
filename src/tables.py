@@ -133,7 +133,7 @@ class Index:
 
 	temp = dict()
 	measures = self.score.parts[part].getElementsByClass('Measure')
-
+	recent_key = 'atonal'
 	for index, measure in enumerate(measures):
 
 	    if(measure.keySignature is not None):

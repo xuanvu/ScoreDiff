@@ -272,7 +272,16 @@ class ScoreDiff:
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
 	key_signature1 = self.index1['key'][part][msr]
         key_signature2 = self.index2['key'][part][msr]
-		
+
+	if(key_signature1 == 'atonal' and not key_signature2 == 'atonal' or
+			key_signature2 == 'atonal' and not key_signature1 == 'atonal'):
+
+	    return False
+
+        if(key_signature1 == 'atonal' and key_signature2 == 'atonal'):
+
+	    return True
+        		
 	logging.debug("key signature 1.sharps: "+str(key_signature1.sharps))
 	logging.debug("key signature 2.sharpts: "+str(key_signature2.sharps))
 	return key_signature1.sharps == key_signature2.sharps
