@@ -51,9 +51,8 @@ class ScoreDiff:
        	self.score2 = base.parse(score2)
         self.name1 = score1
         self.name2 = score2
-	self.clef_table1 = ClefTable(self.score1).build_all_parts()
-	self.clef_table2 = ClefTable(self.score2).build_all_parts()
-
+	self.index1 = Index(self.score1).build()	
+	self.index2 = Index(self.score2).build()
     
     def display(self, msr=0, part=0):
         """Useful for displaying the differences between the two scores visually
@@ -84,10 +83,10 @@ class ScoreDiff:
 	  part (int): the part for which to make the comparison
 
 	Returns:
-	boolean. The result of the comparison::
+	  boolean. The result of the comparison::
 
-	 True -- The scores have the same accidentals
-	 False -- The scores do not have the same accidentals
+	   True -- The scores have the same accidentals
+	   False -- The scores do not have the same accidentals
 
 	Raises:
 	  ScoreException
@@ -125,30 +124,14 @@ class ScoreDiff:
 
 	    measures = self.score1.parts[part].getElementsByClass('Measure')
 	    notes = measures[msr].flat.notes
-
-	    if(measures[msr].keySignature == None):
-
-                measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 1)
-                altered = [x.name for x in self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches]
-                
-            else:
-
-                altered = [x.name for x in measures[msr].keySignature.alteredPitches]
-               		
+            altered = [x.name for x in self.index1['key'][part][msr].alteredPitches]
+	   	    
         elif(score_number == 2):
 
             measures = self.score2.parts[part].getElementsByClass('Measure')
             notes = measures[msr].flat.notes
-
-            if(measures[msr].keySignature == None):
-
-                measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 2)
-                altered = [x.name for x in self.score2.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches]
-                
-            else:
-
-                altered = [x.name for x in measures[msr].keySignature.alteredPitches]
-                
+            altered = [x.name for x in self.index2['key'][part][msr].alteredPitches]
+                           
         naturals = set()
         accidentals = []
 	
@@ -185,44 +168,6 @@ class ScoreDiff:
                 naturals.discard(notes[index].name)
 					
         return accidentals
-
-
-    def __get_most_recent_key__(self, msr=0, part=0, score_number=1):
-        """Gets the measure number of the most recent key change
-	
-	Kwargs:
-	  msr (int): measure number that is used to determine what is considered the most recent key change
-
-	  part (int): the part to examine
-
-	  score_number (int): A score number so the function knows which score to analyze
-
-	Returns:
-	  int:	the measure number of the most recent key change
-
-
-	"""
-
-        if(score_number == 1):
-
-	    keys = self.score1.parts[part].flat.getKeySignatures()
-	    target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
-
-	elif(score_number == 2):
-
-	    keys = self.score2.parts[part].flat.getKeySignatures()
-	    target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
-	
-	current = 0
-
-	for key in keys:
-
-	    if(key.measureNumber > current and key.measureNumber <= target_measure):
-
-	        current = key.measureNumber
-		
-	logging.debug("most recent key was: "+str(current))
-	return current	
 
 
     def have_same_articulations(self, msr=0, part=0):
@@ -291,8 +236,8 @@ class ScoreDiff:
 
         measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
-        clef1 = self.clef_table1[part][msr]
-        clef2 = self.clef_table2[part][msr]
+        clef1 = self.index1['clef'][part][msr]
+        clef2 = self.index2['clef'][part][msr]
 	        	
 	logging.debug("clef1.sign: " + str(clef1.sign))
 	logging.debug("clef2.sign: " + str(clef2.sign))
@@ -325,19 +270,9 @@ class ScoreDiff:
         self.__verify_part_and_measure__(msr, part)
         measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
-	key_signature1 = measures1[msr].keySignature
-        key_signature2 = measures2[msr].keySignature
-
-	if(key_signature1 == None):
-
-	    current = self.__get_most_recent_key__(msr, part , 1)	
-	    key_signature1 = self.score1.parts[part].measure(current).keySignature
-
-	if(key_signature2 == None):
+	key_signature1 = self.index1['key'][part][msr]
+        key_signature2 = self.index2['key'][part][msr]
 		
-	    current = self.__get_most_recent_key__(msr, part, 2)
-	    key_signature2 = self.score2.parts[part].measure(current).keySignature        	
-	
 	logging.debug("key signature 1.sharps: "+str(key_signature1.sharps))
 	logging.debug("key signature 2.sharpts: "+str(key_signature2.sharps))
 	return key_signature1.sharps == key_signature2.sharps
@@ -620,20 +555,8 @@ class ScoreDiff:
 
 	self.__verify_part_and_measure__(msr, part)
 
-        measures1 = self.score1.parts[part].getElementsByClass('Measure')
-	measures2 = self.score2.parts[part].getElementsByClass('Measure')
-        time_signature1 = measures1[msr].timeSignature
-        time_signature2 = measures2[msr].timeSignature
-	
-	if(time_signature1 == None):
-
-	    current = self.__get_most_recent_time__(msr, part ,1)
-	    time_signature1 = self.score1.parts[part].measure(current).timeSignature
-	
-	if(time_signature2 == None):
-		
-	    current = self.__get_most_recent_time__(msr, part, 2)
-	    time_signature2 = self.score2.parts[part].measure(current).timeSignature
+        time_signature1 = self.index1['time'][part][msr]        
+	time_signature2 = self.index2['time'][part][msr]	
 	
 	numerator1 = time_signature1.numerator
         numerator2 = time_signature2.numerator
@@ -644,45 +567,6 @@ class ScoreDiff:
 	logging.debug("time signature2: "+str(numerator2) +"/"+str(denominator2))
         return numerator1 == numerator2 and denominator1 == denominator2 
 
-
-    def __get_most_recent_time__(self, msr=0, part=0, score_number=1):
-        """Gets the measure number of the most recent time signature change
-	
-	Kwargs:
-	  msr (int): measure number that is used to determine what is considered the most recent time change
-
-	  part (int): the part to examine
-
-	  score_number (int): A score number so the function knows which score to analyze
-
-	Returns:
-	  int:  the measure number of the most recent time signature change
-
-
-	"""
-
-        if(score_number == 1):
-
-	    times = self.score1.parts[part].flat.getTimeSignatures()
-	    target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
-
-	elif(score_number == 2):
-
-	    times = self.score2.parts[part].flat.getTimeSignatures()
-	    target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
-
-	current = 0
-
-	for time in times:
-
-	    if(time.measureNumber > current and time.measureNumber <= target_measure):
-
-	        current = time.measureNumber
-	
-	logging.debug("most recent time found: "+str(current))
-	return current
-
-              
     def __verify_part_and_measure__(self, msr, part):
         """Checks to make sure the part and measure numbers a user has entered are 
 	not outside of the range that exists for either score
