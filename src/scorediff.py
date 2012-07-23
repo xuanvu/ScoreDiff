@@ -24,11 +24,11 @@ class ScoreDiff:
 
 
     #This ornaments list is used as a reference when comparing ornaments    
-    ORNAMENTS = ['Appoggiatura', 'GeneralAppoggiatura', 'GeneralMordent', 'HalfStepAppoggiatura',
+    ORNAMENTS = set(['Appoggiatura', 'GeneralAppoggiatura', 'GeneralMordent', 'HalfStepAppoggiatura',
                  'HalfSetpInvertedAppoggiatura', 'HalfStepInvertedMordent', 'HalfStepMordent', 'HalfStepTrill',
                  'InvertedAppoggiatura', 'InvertedMordent', 'InvertedTurn', 'Mordent', 'Schleifer', 'Shake',
                  'Tremolo', 'Trill', 'Turn', 'WholeStepAppoggiatura', 'WholeStepInvertedAppoggiatura',
-                 'WholeStepInvertedMordent', 'WholeStepMordent', 'WholeStepTrill']
+                 'WholeStepInvertedMordent', 'WholeStepMordent', 'WholeStepTrill'])
 
 
     def __init__(self, score1, score2, localCorpusPath = '.'):
