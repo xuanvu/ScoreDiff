@@ -51,7 +51,7 @@ class Index:
 	return temp
 
     def build_all_clefs(self):
-        """Returns a dictionary of (part, (measure, clef)) pairs based on score passed to __init__
+        """Returns a dictionary of dictionaries of (measure, clef) pairs based on score passed to __init__
 
 	"""
 
@@ -118,7 +118,11 @@ class Index:
 	    if(measure.keySignature is not None):
 
 	        recent_key = measure.keySignature
-		temp.update({index:recent_key})
+		temp.update({index:measure.keySignature})
+
+	    else:
+
+	        temp.update({index:recent_key})
 
 	return temp
 
@@ -150,6 +154,6 @@ class Index:
 
 	index.update({'clef':self.build_all_clefs()})
 	index.update({'time':self.build_all_times()})
-	index.update({'keys':self.build_all_keys()})
+	index.update({'key':self.build_all_keys()})
 
 	return index
