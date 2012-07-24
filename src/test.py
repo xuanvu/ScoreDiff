@@ -5,7 +5,7 @@ from os.path import abspath
 
 path = abspath('test_cases')
 
-def test_key(score1, score2, measure=0, part=0):
+def test_key(score1, score2, measure1=0, part1=0, measure2=0, part2=0):
 
 	"""
 	   >>> test_key('bwv66.6.mxl', 'different_key.mxl')
@@ -17,10 +17,10 @@ def test_key(score1, score2, measure=0, part=0):
 	   >>> test_key('bwv66.6.mxl', 'different_ornaments.mxl')
 	   True
 
-	   >>> test_key('bwv66.6.mxl', 'different_key2.mxl',1)
+	   >>> test_key('bwv66.6.mxl', 'different_key2.mxl',1,0,1)
 	   False
 
-	   >>> test_key('bwv66.6.mxl', 'different_key3.mxl', 5)
+	   >>> test_key('bwv66.6.mxl', 'different_key3.mxl', 5,0,5)
 	   False
 
 	   >>> test_key('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
@@ -32,10 +32,10 @@ def test_key(score1, score2, measure=0, part=0):
 	   >>> test_key('bwv66.6.mxl', 'scriabin_opus_8_no5.mxl')
 	   False
 
-	   >>> test_key('scriabin_opus_8_no5.mxl', 'ravel_sonatine_1.mxl', 5)
+	   >>> test_key('scriabin_opus_8_no5.mxl', 'ravel_sonatine_1.mxl', 5,0,5)
 	   False
 
-	   >>> test_key('scriabin_opus_2_no1.mxl', 'ravel_sonatine_1.mxl',6 )
+	   >>> test_key('scriabin_opus_2_no1.mxl', 'ravel_sonatine_1.mxl',6,0,6)
 	   False
 
 	   >>> test_key('bwv66.6.mxl', 'no_key.mxl')
@@ -45,9 +45,9 @@ def test_key(score1, score2, measure=0, part=0):
 	"""
 
 	diff = ScoreDiff(score1, score2, path)
-        return diff.have_same_key_signature(measure, part)
+        return diff.have_same_key_signature(measure1, part1, measure2, part2)
 
-def test_time_signature(score1, score2, measure = 0, part = 0):
+def test_time_signature(score1, score2, measure1 = 0, part1 = 0, measure2=0, part2=0):
 
 	"""
 	   >>> test_time_signature('bwv66.6.xml', 'different_time.mxl')
@@ -59,10 +59,10 @@ def test_time_signature(score1, score2, measure = 0, part = 0):
 	   >>> test_time_signature('bwv66.6.mxl', 'different_key.mxl')
 	   True
 
-	   >>> test_time_signature('bwv66.6.mxl', 'different_time2.mxl', 5)
+	   >>> test_time_signature('bwv66.6.mxl', 'different_time2.mxl', 5,0,5)
 	   False
 
-	   >>> test_time_signature('bwv66.6.mxl', 'different_time3.mxl', 4)
+	   >>> test_time_signature('bwv66.6.mxl', 'different_time3.mxl', 4,0,4)
 	   False
 
 	   >>> test_time_signature('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
@@ -75,10 +75,10 @@ def test_time_signature(score1, score2, measure = 0, part = 0):
 	   True
 	
 
-	   >>> test_time_signature('scriabin_opus_2_no1.mxl', 'ravel_sonatine_1.mxl', 4)
+	   >>> test_time_signature('scriabin_opus_2_no1.mxl', 'ravel_sonatine_1.mxl', 4,0,4)
 	   False
 
-	   >>> test_time_signature('scriabin_opus_8_no5.mxl', 'ravel_sonatine_1.mxl', 5)
+	   >>> test_time_signature('scriabin_opus_8_no5.mxl', 'ravel_sonatine_1.mxl', 5,0,5)
 	   False
 	   
 	"""
@@ -87,10 +87,10 @@ def test_time_signature(score1, score2, measure = 0, part = 0):
 
 
 	diff = ScoreDiff(score1, score2, path)
-	return diff.have_same_time_signature(measure, part)
+	return diff.have_same_time_signature(measure1, part1, measure2, part2)
 
 
-def test_clef(score1, score2, measure = 0, part = 0):
+def test_clef(score1, score2, measure1 = 0, part1 = 0, measure2=0, part2=0):
 
 	"""
 	   >>> test_clef('bwv66.6.mxl', 'different_clef.mxl')
@@ -102,10 +102,10 @@ def test_clef(score1, score2, measure = 0, part = 0):
 	   >>> test_clef('bwv66.6.mxl', 'different_pitches.mxl')
 	   True
 
-	   >>> test_clef('bwv66.6.mxl', 'different_clef2.mxl', 1)
+	   >>> test_clef('bwv66.6.mxl', 'different_clef2.mxl', 1,0,1)
 	   False
 
-	   >>> test_clef('bwv66.6.mxl', 'different_clef3.mxl', 2)
+	   >>> test_clef('bwv66.6.mxl', 'different_clef3.mxl', 2,0,2)
 	   False
 
 	   >>> test_clef('bwv66.6.mxl', 'different_clef3.mxl')
@@ -121,18 +121,18 @@ def test_clef(score1, score2, measure = 0, part = 0):
 
 	"""
 	diff = ScoreDiff(score1, score2, path)
-	return diff.have_same_clef_markings(measure, part)
+	return diff.have_same_clef_markings(measure1, part1, measure2, part2)
 
-def test_pitches(score1, score2, measure = 0, part = 0):
+def test_pitches(score1, score2, measure1 = 0, part1 = 0, measure2=0, part2=0):
 
 	"""
 	   >>> test_pitches('bwv66.6.mxl', 'different_pitches.mxl')
 	   False
 
-	   >>> test_pitches('bwv66.6.mxl', 'different_pitches2.mxl', 1)
+	   >>> test_pitches('bwv66.6.mxl', 'different_pitches2.mxl', 1,0,1)
 	   False
 
-	   >>> test_pitches('bwv66.6.mxl', 'different_pitches2.mxl', 2)
+	   >>> test_pitches('bwv66.6.mxl', 'different_pitches2.mxl', 2,0,2)
 	   False
 
 	   >>> test_pitches('bwv66.6.mxl', 'different_dynamics.mxl')
@@ -141,7 +141,7 @@ def test_pitches(score1, score2, measure = 0, part = 0):
 	   >>> test_pitches('bwv66.6.mxl', 'different_key.mxl')
 	   True
 
-	   >>> test_pitches('bwv66.6.mxl', 'different_pitches3.mxl', 3)
+	   >>> test_pitches('bwv66.6.mxl', 'different_pitches3.mxl', 3,0,3)
 	   False
 
 	   >>> test_pitches('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
@@ -157,9 +157,9 @@ def test_pitches(score1, score2, measure = 0, part = 0):
 	"""
 
 	diff = ScoreDiff(score1, score2, path)
-	return diff.have_same_pitches(measure, part)
+	return diff.have_same_pitches(measure1, part1, measure2, part2)
 
-def test_ornaments(score1, score2, measure = 0, part = 0):
+def test_ornaments(score1, score2, measure1 = 0, part1 = 0, measure2=0, part2=0):
 
 	"""
 	   >>> test_ornaments('bwv66.6.mxl', 'different_ornaments.mxl')
@@ -186,9 +186,9 @@ def test_ornaments(score1, score2, measure = 0, part = 0):
 	"""
 	
 	diff = ScoreDiff(score1, score2, path)
-	return diff.have_same_ornaments(measure, part)
+	return diff.have_same_ornaments(measure1, part1, measure2, part2)
 
-def test_accidentals(score1, score2, measure = 0, part = 0):
+def test_accidentals(score1, score2, measure1 = 0, part1 = 0, measure2=0, part2=0):
 
 	"""
 	   >>> test_accidentals('bwv66.6.mxl', 'different_accidentals.mxl')
@@ -200,10 +200,10 @@ def test_accidentals(score1, score2, measure = 0, part = 0):
 	   >>> test_accidentals('bwv66.6.mxl', 'bwv66.6.mxl')
 	   True
 
-	   >>> test_accidentals('bwv66.6.mxl', 'different_accidentals2.mxl', 1)
+	   >>> test_accidentals('bwv66.6.mxl', 'different_accidentals2.mxl', 1,0,1)
 	   False
 
-	   >>> test_accidentals('bwv66.6.mxl', 'different_accidentals3.mxl', 2)
+	   >>> test_accidentals('bwv66.6.mxl', 'different_accidentals3.mxl', 2,0,2)
 	   False
 
 	   >>> test_accidentals('bwv66.6.mxl', 'different_pitches.mxl')
@@ -240,18 +240,18 @@ def test_accidentals(score1, score2, measure = 0, part = 0):
 	  
 	"""
 	diff = ScoreDiff(score1, score2, path)
-	return diff.have_same_accidentals(measure, part)
+	return diff.have_same_accidentals(measure1, part1, measure2, part2)
 
-def test_stem_directions(score1, score2, measure = 0, part = 0):
+def test_stem_directions(score1, score2, measure1 = 0, part1 = 0, measure2=0, part2=0):
 
 	"""
 	   >>> test_stem_directions('bwv66.6.mxl', 'different_stems.mxl')
 	   False
 
-	   >>> test_stem_directions('bwv66.6.mxl', 'different_stems2.mxl', 1)
+	   >>> test_stem_directions('bwv66.6.mxl', 'different_stems2.mxl', 1,0,1)
 	   False
 
-	   >>> test_stem_directions('bwv66.6.mxl', 'different_stems3.mxl', 4)
+	   >>> test_stem_directions('bwv66.6.mxl', 'different_stems3.mxl', 4,0,4)
 	   False
 
 	   >>> test_stem_directions('bwv66.6.mxl', 'different_ornaments.mxl')
@@ -270,10 +270,10 @@ def test_stem_directions(score1, score2, measure = 0, part = 0):
 	"""
 
 	diff = ScoreDiff(score1, score2, path)
-	return diff.have_same_stem_directions(measure, part)
+	return diff.have_same_stem_directions(measure1, part1, measure2, part2)
 
 
-def test_spanners(score1, score2, measure = 0, part = 0):
+def test_spanners(score1, score2, measure1 = 0, part1 = 0, measure2=0, part2=0):
 
 	"""
 	   >>> test_spanners('bwv66.6.mxl', 'different_phrasing.mxl')
@@ -302,9 +302,9 @@ def test_spanners(score1, score2, measure = 0, part = 0):
 	"""
 
 	diff = ScoreDiff(score1, score2, path)
-	return diff.have_same_spanners(measure, part)
+	return diff.have_same_spanners(measure1, part1, measure2, part2)
 
-def test_articulations(score1, score2, measure = 0, part = 0):
+def test_articulations(score1, score2, measure1 = 0, part1 = 0, measure2=0, part2=0):
 
 	"""
 	   >>> test_articulations('bwv66.6.mxl', 'different_articulations.mxl')
@@ -332,7 +332,7 @@ def test_articulations(score1, score2, measure = 0, part = 0):
 
 	"""
 	diff = ScoreDiff(score1, score2, path)
-	return diff.have_same_articulations(measure, part)
+	return diff.have_same_articulations(measure1, part1, measure2, part2)
 
 if __name__ == '__main__':
 
