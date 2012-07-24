@@ -58,9 +58,9 @@ class ScoreDiff:
         """Useful for displaying the differences between the two scores visually
 
         Kwargs:
-          msr (int): A measure number to display
+          msr1 and msr2 (int): A measure number to display
 
-	  part (int): A part number to examine.  
+	  part1 and part2 (int): A part number to examine.  
           
 	  
         """
@@ -78,9 +78,9 @@ class ScoreDiff:
 	specified measure and for the specified part
 
 	Kwargs:
-	  msr (int): the measure number at which to make the comparison
+	  msr1 and msr2 (int): the measure number at which to make the comparison
 	
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
 	Returns:
 	  boolean. The result of the comparison::
@@ -189,9 +189,9 @@ class ScoreDiff:
 	at the specified measure and for the specified part [#f2]_
 	
 	Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  the measure number at which to make the comparison
           
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
         Returns:
           boolean.   The result of the comparison::
@@ -230,9 +230,9 @@ class ScoreDiff:
 	at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  the measure number at which to make the comparison
           
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
         Returns:
           boolean.   The result of the comparison::
@@ -264,9 +264,9 @@ class ScoreDiff:
 	at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  the measure number at which to make the comparison
           
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
         Returns:
           boolean.   The result of the comparison::
@@ -303,9 +303,9 @@ class ScoreDiff:
         """Checks if the two scores both have the same ornaments at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  the measure number at which to make the comparison
           
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
         Returns:
           boolean.   The result of the comparison::
@@ -369,9 +369,9 @@ class ScoreDiff:
 
         
 	Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  the measure number at which to make the comparison
           
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
         Returns:
           boolean.   The result of the comparison::
@@ -401,9 +401,9 @@ class ScoreDiff:
         .. note:: This function will determine if the same pitches are present without considering the order in which they appear.
 
         Kwargs:
-          msr (int): the measure number at which to make the comparison
+          msr1 and msr2 (int): the measure number at which to make the comparison
 
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
         Returns:
           boolean.  The result of the comparison::
@@ -431,9 +431,9 @@ class ScoreDiff:
 	sites at the specified measure and for the specified part [#f1]_
 	
 	Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  the measure number at which to make the comparison
           
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
         Returns:
           boolean.   The result of the comparison::
@@ -490,9 +490,9 @@ class ScoreDiff:
 	directions at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  the measure number at which to make the comparison
           
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
         Returns:
           boolean.   The result of the comparison::
@@ -558,9 +558,9 @@ class ScoreDiff:
 	signature at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  the measure number at which to make the comparison
           
-	  part (int): the part for which to make the comparison
+	  part1 and part2 (int): the part for which to make the comparison
 
         Returns:
           boolean.   The result of the comparison::
@@ -593,9 +593,9 @@ class ScoreDiff:
 	not outside of the range that exists for either score
 
         Args:
-          part (int): The part number to check
+          part1 and part2 (int): The part number to check
 
-	  msr (int): The measure number to check
+	  msr1 and msr2 (int): The measure number to check
 
         Raises:
           ScoreException
@@ -619,7 +619,7 @@ class ScoreDiff:
         """Checks to make sure the part number a user has entered is not outside the range that exists for either score
 
 	Args:
-	  part (int): The part number to check
+	  part1 and part2 (int): The part number to check
 
 	Raises:
 	  ScoreException
