@@ -13,7 +13,7 @@ from music21.corpus import base
 import logging
 logging.basicConfig(filename='debug.log', level = logging.DEBUG)
 #To enable debug output, comment out the following line
-#logging.disable(logging.DEBUG)
+logging.disable(logging.DEBUG)
 from tables import *
 
 class ScoreDiff:

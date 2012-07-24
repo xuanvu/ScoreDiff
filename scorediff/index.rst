@@ -13,6 +13,7 @@ Contents:
 
    about
    ScoreDiff
+   Tables
 
 
 Indices and tables
