@@ -13,7 +13,7 @@ from music21.corpus import base
 import logging
 logging.basicConfig(filename='debug.log', level = logging.DEBUG)
 #To enable debug output, comment out the following line
-logging.disable(logging.DEBUG)
+#logging.disable(logging.DEBUG)
 from tables import *
 
 class ScoreDiff:
@@ -51,8 +51,8 @@ class ScoreDiff:
        	self.score2 = base.parse(score2)
         self.name1 = score1
         self.name2 = score2
-	self.index1 = Index(self.score1).build()	
-	self.index2 = Index(self.score2).build()
+	self.index1 = Tables(self.score1).build()	
+	self.index2 = Tables(self.score2).build()
     
     def display(self, msr1=0, part1=0, msr2=0, part2=0):
         """Useful for displaying the differences between the two scores visually
