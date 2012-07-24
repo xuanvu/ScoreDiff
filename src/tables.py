@@ -9,7 +9,7 @@
 
 """
 
-class Index:
+class Tables:
     """The Index class builds a variety of tables
     for convenient lookup
 
