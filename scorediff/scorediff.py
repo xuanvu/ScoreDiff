@@ -321,7 +321,7 @@ class ScoreDiff:
 	if(key_signature1 is None  and key_signature2 is not None or
 			key_signature2 is None and key_signature1 is not None):
             
-	    raise AtonalPassageException("One or more measures do not have a key signature")
+	    raise AtonalPassageException("One or more measures does not have a key signature")
 
         if(key_signature1 is None and key_signature2 is None):
 
