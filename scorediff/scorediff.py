@@ -138,7 +138,7 @@ class ScoreDiff:
 	    measures = self.score1.parts[part].getElementsByClass('Measure')
 	    notes = measures[msr].flat.notes
 
-            if(self.index1['key'][part][msr] == 'atonal'):
+            if(self.index1['key'][part][msr] is None):
 
 	        altered = []
 
@@ -151,7 +151,7 @@ class ScoreDiff:
             measures = self.score2.parts[part].getElementsByClass('Measure')
             notes = measures[msr].flat.notes
 
-            if(self.index2['key'][part][msr] == 'atonal'):
+            if(self.index2['key'][part][msr] is None):
 
 	        altered = []
             
