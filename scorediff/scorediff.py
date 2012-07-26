@@ -83,7 +83,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same accidentals at the 
 	specified measure and for the specified part
 
-	.. note:: This function will ignore a cautionary sharp or flat on a pitch
+	.. note:: This method will ignore a cautionary sharp or flat on a pitch
 	   that is already altered in the same way in the key signature unless
 	   that pitch has previously had a natural applied to it in the same
 	   measure
@@ -118,14 +118,14 @@ class ScoreDiff:
 
 
     def __get_accidentals__(self, score_number, msr=0, part=0):
-        """A helper function for the have_same_accidentals fuction
+        """A helper method for the have_same_accidentals fuction
 	
 	Args:
 	  msr (int): measure at which the accidentals should be collected
 
 	  part (int): the part number for which the score should be analyzed
 
-	  score_number (int):  A score number so the function knows which score to analyze
+	  score_number (int):  A score number so the method knows which score to analyze
 
 	Returns:
 	  list:  The collected accidentals
@@ -389,7 +389,7 @@ class ScoreDiff:
     def have_same_pitches(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
 	
-	.. note:: This function will compare pitches in the order that they occur.  
+	.. note:: This method will compare pitches in the order that they occur.  
 	   To compare without considering order, use have_same_pitches_ignore_order.
 
         
@@ -425,7 +425,7 @@ class ScoreDiff:
     def have_same_pitches_ignore_order(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
 
-        .. note:: This function will determine if the same pitches are present without considering the order in which they appear.
+        .. note:: This method will determine if the same pitches are present without considering the order in which they appear.
 
         Kwargs:
           msr1 and msr2 (int): The measures to compare
