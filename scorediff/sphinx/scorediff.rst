@@ -71,6 +71,24 @@ Example2
         True
         >>> 
 
+::
+
+        >>> from scorediff import *
+        >>> diff = ScoreDiff('bwv66.6.mxl', 'beethoven_appassionata.mxl')
+        >>> for i in range(0, 10):
+        ...     print diff.have_same_accidentals(i,0,i)
+        ...
+        True
+        True
+        True
+        False
+        True
+        False
+        False
+        True
+        True
+        False
+        >>>
 
 .. automethod:: ScoreDiff.have_same_articulations
 
