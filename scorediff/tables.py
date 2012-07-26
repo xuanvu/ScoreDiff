@@ -10,7 +10,7 @@
 """
 
 class Tables:
-    """The Index class builds a variety of tables
+    """The Tables class builds a variety of tables
     for convenient lookup
 
     """
@@ -26,8 +26,8 @@ class Tables:
         self.score = score
 
 
-    def build_clef(self, part):
-        """Returns a list of clef objects based on score passed to __init__
+    def build_clefs(self, part):
+        """Returns a list of clef objects based on all measures in part from score passed to __init__
 	        
 	Args:
 	  part (music21.stream.Part):  A music21 part object to restrict
@@ -74,7 +74,7 @@ class Tables:
 
 
     def build_times(self, part):
-        """Returns a list of timesignature objects based on score passed to __init__
+        """Returns a list of timesignature objects based on all measures in part from score passed to __init__
 
 	Args:
 	  part (music21.stream.Part):  A music21 part object to restrict
@@ -121,7 +121,7 @@ class Tables:
 
 
     def build_keys(self, part):
-        """Returns a list of keysignature objects based on score passed to __init__
+        """Returns a list of keysignature objects based on all measures in part from score passed to __init__
         
 	Args:
 	  part (music21.stream.Part):  A music21 part object to restrict the building
