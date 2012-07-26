@@ -135,7 +135,7 @@ Suppose a musicxml file contains the following snippet::
 
 
 If it seems like something is missing here, it's because
-a key signature was intentially omitted.  The have_same_key_signature
+a key signature was intentionally omitted.  The have_same_key_signature
 method will treat this measure as an 'atonal' passage, and assign
 the key signature of this measure to be 'atonal'.  This is done
 to give a musicxml writer more flexibility(and perhaps peace of mind),
