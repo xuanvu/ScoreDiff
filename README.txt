@@ -8,6 +8,10 @@ Installation
 Stay tuned for the first PyPi release
 
 
+Platform
+-------------
+ScoreDiff should work well with Mac, Windows, or Linux
+
 Prerequisites
 --------------
 Music21 and a version of python that supports it.
