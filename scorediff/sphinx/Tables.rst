@@ -1,4 +1,4 @@
-tables documentation
+tables
 **********************
 
 .. automodule:: tables

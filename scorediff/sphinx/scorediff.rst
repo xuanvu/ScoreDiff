@@ -1,4 +1,4 @@
-scorediff documentation
+scorediff
 ************************
 
 .. automodule:: scorediff
