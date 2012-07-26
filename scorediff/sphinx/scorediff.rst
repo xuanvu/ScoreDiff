@@ -12,7 +12,7 @@ Class: ScoreDiff
 
 .. automethod:: ScoreDiff.display
 
-Example1
+Example1.1
 +++++++++++++++++++
 ::
         
@@ -26,6 +26,8 @@ Example1
         counting begins at zero, hence the reason 3 gives the 4th measure.
          
 
+Example1.2
+++++++++++++++
 ::
 
         >>> from scorediff import *
@@ -42,7 +44,7 @@ Example1
 
 .. automethod:: ScoreDiff.have_same_accidentals
 
-Example2
+Example2.1
 +++++++++++++
 ::
 
@@ -52,6 +54,8 @@ Example2
         True
         >>>
 
+Example2.2
++++++++++++++
 ::
 
         >>> from scorediff import *
@@ -71,6 +75,8 @@ Example2
         True
         >>> 
 
+Example2.3
+++++++++++++
 ::
 
         >>> from scorediff import *
