@@ -102,13 +102,48 @@ Example2.3
 
 .. automethod:: ScoreDiff.have_same_articulations
 
+
+
 -------
 
 .. automethod:: ScoreDiff.have_same_clef_markings
 
+
 -------
 
 .. automethod:: ScoreDiff.have_same_key_signature
+
+Example3.1
++++++++++++
+Suppose a musicxml file contains the following snippet::
+
+        </part-list>
+        <part id="P1">
+          <measure number="0">
+            <attributes>
+              <divisions>1080</divisions>
+              
+              <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+              </time>
+              <clef>
+                <sign>G</sign>
+                <line>2</line>
+                </clef>
+                </attributes>
+
+
+If it seems like something is missing here, it's because
+a key signature was intentially omitted.  The have_same_key_signature
+method will treat this measure as an 'atonal' passage, and assign
+the key signature of this measure to be 'atonal'.  This is done
+to give a musicxml writer more flexibility(and perhaps peace of mind),
+since the intuitive way of encoding an atonal passage is not to give the
+measure a key signature of no sharps or flats, but to leave off a key signature 
+altogether. There is a big difference between a piece that is in a key signature
+with no sharps or flats, and a piece that does not have a key signature.
+
 
 -------
 

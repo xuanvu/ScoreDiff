@@ -245,6 +245,10 @@ class ScoreDiff:
         """Checks if the two scores both have the same clef markings 
 	at the specified measure and for the specified part
 
+	.. note:: The current version does not support mid-measure clef
+	   changes.  This is something that will be addressed in future
+	   versions.
+
         Kwargs:
           msr1 and msr2 (int):  The measures to compare
 
@@ -281,6 +285,11 @@ class ScoreDiff:
     def have_same_key_signature(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same key signature 
 	at the specified measure and for the specified part
+
+	.. note:: If both measures being compared are 'atonal', then
+	   the method returns true.  Perhaps not surpisingly, 
+	   if one is 'atonal' and the other is not, then the method returns False.
+	   See the examples for more about this
 
         Kwargs:
           msr1 and msr2 (int): The measures to compare
