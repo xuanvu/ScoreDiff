@@ -289,7 +289,7 @@ class ScoreDiff:
 	.. note:: If both measures being compared are 'atonal', then
 	   the method returns true.  Perhaps not surpisingly, 
 	   if one is 'atonal' and the other is not, then the method returns False.
-	   See the examples for more about this
+	   See the example for more about this
 
         Kwargs:
           msr1 and msr2 (int): The measures to compare
