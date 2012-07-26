@@ -286,7 +286,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same key signature 
 	at the specified measure and for the specified part
 
-	.. note:: The exception thrown in the case of a measure with no
+	.. note:: The exception raised in the case of a measure with no
 	   key signature is done to alert the user in case someone has
 	   inadvertently omitted a key signature from a measure, not to
 	   suggest that an atonal piece is "wrong".
