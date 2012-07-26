@@ -1,4 +1,4 @@
-module:scorediff
+scorediff
 ************************
 
 .. automodule:: scorediff
