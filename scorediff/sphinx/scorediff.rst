@@ -19,10 +19,12 @@ Example1
         >>> from scorediff import *
         >>> diff = ScoreDiff('bwv66.6.mxl', 'beethoven_appassionata.mxl')
         >>> diff.display(3,1,5,0)
+                
+.. note::  
         This will display the 4th measure of the 2nd part of score1
         and the 6th measure of the first part of score2.  As usual,
         counting begins at zero, hence the reason 3 gives the 4th measure.
-        >>> 
+         
 
 ::
 
