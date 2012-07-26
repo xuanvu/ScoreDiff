@@ -10,7 +10,7 @@ Class: Tables
 
 ----------------------
 
-.. automethod:: Tables.build_clef
+.. automethod:: Tables.build_clefs
 
 Example1.1
 ++++++++++++++
