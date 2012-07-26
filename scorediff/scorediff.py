@@ -81,7 +81,7 @@ class ScoreDiff:
 
     def have_same_accidentals(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same accidentals at the 
-	specified measure and for the specified part
+	specified measures and for the specified parts
 
 	.. note:: This method will ignore a cautionary sharp or flat on a pitch
 	   that is already altered in the same way in the key signature unless
@@ -199,7 +199,7 @@ class ScoreDiff:
 
     def have_same_articulations(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same articulations 
-	at the specified measure and for the specified part [#f2]_
+	at the specified measures and for the specified parts [#f2]_
 	
 	Kwargs:
           msr1 and msr2 (int):  The measures to compare
@@ -243,7 +243,7 @@ class ScoreDiff:
 
     def have_same_clef_markings(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same clef markings 
-	at the specified measure and for the specified part
+	at the specified measures and for the specified parts
 
 	.. note:: The current version does not support mid-measure clef
 	   changes.  This is something that will be addressed in future
@@ -284,7 +284,7 @@ class ScoreDiff:
 
     def have_same_key_signature(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same key signature 
-	at the specified measure and for the specified part
+	at the specified measures and for the specified parts
 
 	.. note:: The exception raised in the case of a measure with no
 	   key signature is done to alert the user in case someone has
@@ -333,7 +333,7 @@ class ScoreDiff:
 
 
     def have_same_ornaments(self, msr1=0, part1=0, msr2=0, part2=0):
-        """Checks if the two scores both have the same ornaments at the specified measure and for the specified part
+        """Checks if the two scores both have the same ornaments at the specified measures and for the specified parts
 
         Kwargs:
           msr1 and msr2 (int):  The measures to compare
@@ -398,7 +398,7 @@ class ScoreDiff:
 
 
     def have_same_pitches(self, msr1=0, part1=0, msr2=0, part2=0):
-        """Checks if the two scores both have the same pitches at the specified measure and for the specified part
+        """Checks if the two scores both have the same pitches at the specified measures and for the specified parts
 	
 	.. note:: This method will compare pitches in the order that they occur.  
 	   To compare without considering order, use have_same_pitches_ignore_order.
@@ -434,7 +434,7 @@ class ScoreDiff:
 
 
     def have_same_pitches_ignore_order(self, msr1=0, part1=0, msr2=0, part2=0):
-        """Checks if the two scores both have the same pitches at the specified measure and for the specified part
+        """Checks if the two scores both have the same pitches at the specified measures and for the specified parts
 
         .. note:: This method will determine if the same pitches are present without considering the order in which they appear.
 
@@ -469,7 +469,7 @@ class ScoreDiff:
 
     def have_same_spanners(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same spanner 
-	sites at the specified measure and for the specified part [#f1]_
+	sites at the specified measures and for the specified parts [#f1]_
 	
 	Kwargs:
           msr1 and msr2 (int):  The measures to compare
@@ -531,7 +531,7 @@ class ScoreDiff:
 
     def have_same_stem_directions(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same stem 
-	directions at the specified measure and for the specified part
+	directions at the specified measures and for the specified parts
 
 	.. note:: This method will consider a chord with multiple upward
 	   pointing stems as one upward pointing stem.  This is done to facilitate
@@ -608,7 +608,7 @@ class ScoreDiff:
    	
     def have_same_time_signature(self, msr1=0, part1=0, msr2=0, part2=0):
         """Checks if the two scores both have the same time 
-	signature at the specified measure and for the specified part
+	signature at the specified measures and for the specified parts
 
         Kwargs:
           msr1 and msr2 (int):  The measures to compare
