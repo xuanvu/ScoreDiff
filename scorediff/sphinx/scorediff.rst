@@ -1,4 +1,4 @@
-scorediff
+module:scorediff
 ************************
 
 .. automodule:: scorediff
@@ -9,6 +9,7 @@ Class: ScoreDiff
 
 .. autoclass:: ScoreDiff
   
+---------
 
 .. automethod:: ScoreDiff.display
 
@@ -41,6 +42,7 @@ Example1.2
         raise MeasureRangeError("measure number "+str(msr2) + " does not exist for "+self.name2)
         scorediff.MeasureRangeError: 'measure number 6000 does not exist for beethoven_appassionata.mxl'
 
+-------
 
 .. automethod:: ScoreDiff.have_same_accidentals
 
@@ -96,30 +98,39 @@ Example2.3
         False
         >>>
 
+-----
+
 .. automethod:: ScoreDiff.have_same_articulations
 
-
+-------
 
 .. automethod:: ScoreDiff.have_same_clef_markings
 
+-------
 
 .. automethod:: ScoreDiff.have_same_key_signature
 
+-------
 
 .. automethod:: ScoreDiff.have_same_ornaments
 
+-------
 
 .. automethod:: ScoreDiff.have_same_pitches
 
+-------
 
 .. automethod:: ScoreDiff.have_same_pitches_ignore_order
 
+-------
 
 .. automethod:: ScoreDiff.have_same_spanners
 
+-------
 
 .. automethod:: ScoreDiff.have_same_stem_directions
 
+-------
 
 .. automethod:: ScoreDiff.have_same_time_signature
       
