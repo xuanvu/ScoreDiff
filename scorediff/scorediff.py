@@ -286,10 +286,10 @@ class ScoreDiff:
         """Checks if the two scores both have the same key signature 
 	at the specified measure and for the specified part
 
-	.. note:: If both measures being compared are atonal, then
-	   the method returns true.  Perhaps not surpisingly, 
-	   if one is atonal and the other is not, then the method returns False.
-	   See the example for more about this
+	.. note:: The exception thrown in the case of a measure with no
+	   key signature is done to alert the user in case someone has
+	   inadvertently omitted a key signature from a measure, not to
+	   suggest that an atonal piece is "wrong".
 
         Kwargs:
           msr1 and msr2 (int): The measures to compare
@@ -307,6 +307,8 @@ class ScoreDiff:
 	  
 	  MeasureRangeError: If user passes in a measure that is out of range for either score
 
+	  AtonalPassageException: If there is no recorded key signature for msr1 or msr2
+
        
 
         """
@@ -319,11 +321,11 @@ class ScoreDiff:
 	if(key_signature1 is None  and key_signature2 is not None or
 			key_signature2 is None and key_signature1 is not None):
             
-	    return False
+	    raise AtonalPassageException("One or more measures do not have a key signature")
 
         if(key_signature1 is None and key_signature2 is None):
 
-	    return True
+	    raise AtonalPassageException("Neither measure has a key signature")
         		
 	logging.debug("key signature1.sharps: "+str(key_signature1.sharps))
 	logging.debug("key signature2.sharps: "+str(key_signature2.sharps))
@@ -706,7 +708,7 @@ class RangeError(Exception):
 
 
     def __str__(self):
-	"""Function for fetching this object's error message
+	"""method for fetching this object's error message
 		
 	Returns:
 	  This object's error message
@@ -737,7 +739,7 @@ class MeasureRangeError(RangeError):
 
 
     def __str__(self):
-	"""Function for fetching this object's error message"
+	"""method for fetching this object's error message"
 
 	Returns:
           This object's error message
@@ -768,7 +770,7 @@ class PartRangeError(RangeError):
 
 
     def __str__(self):
-	"""Function for fetching this object's error message
+	"""method for fetching this object's error message
 
 	Returns:
 	  This object's error message
@@ -777,6 +779,60 @@ class PartRangeError(RangeError):
 	"""
 
         return repr(self.value)
+
+class PassageException(Exception):
+    """Class for handling unusual passages in a score
+
+    """
+
+    def __init__(self, value):
+        """Initializes the PassageException object
+
+	Args:
+	  value(str): An error message
+
+
+	"""
+
+	self.value = value
+
+    def __str__(self):
+        """method for fetching this object's error message
+
+	Returns:
+	  This object's error message
+
+
+        """
+
+	return repr(self.value)
+
+class AtonalPassageException(PassageException):
+    """Class used for handling atonal passages
+
+    """
+
+    def __init_(self, value):
+        """Initializes the AtonalPassageException object
+
+	Args:
+	  value(str): An error message
+
+
+        """
+
+	self.value = value
+
+    def __str__(self):
+        """method for fetching this object's error message
+
+	Returns:
+	  This object's error message
+
+
+        """
+
+	return repr(self.value)
 
 
 

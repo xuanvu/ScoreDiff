@@ -113,31 +113,6 @@ Example2.3
 
 .. automethod:: ScoreDiff.have_same_key_signature
 
-Example3.1
-+++++++++++
-Suppose a musicxml file contains the following snippet::
-
-        </part-list>
-        <part id="P1">
-          <measure number="0">
-            <attributes>
-              <divisions>1080</divisions>
-              
-              <time>
-                <beats>4</beats>
-                <beat-type>4</beat-type>
-              </time>
-              <clef>
-                <sign>G</sign>
-                <line>2</line>
-                </clef>
-                </attributes>
-
-
-If it seems like something is missing here, it's because
-a key signature was intentionally omitted.  The have_same_key_signature
-method will treat this measure as an atonal passage.  Two atonal passages
-will be said to have the same key signature.
 
 
 -------
@@ -180,7 +155,16 @@ Class: PartRangeError
    :members:
 
 
+Class: PassageException
+-------------------------
+.. autoclass:: PassageException
+   :members:
 
+
+Class: AtonalPassageException
+-----------------------------
+.. autoclass:: AtonalPassageException
+   :members:
 
 
 .. rubric:: Footnotes
