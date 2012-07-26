@@ -286,9 +286,9 @@ class ScoreDiff:
         """Checks if the two scores both have the same key signature 
 	at the specified measure and for the specified part
 
-	.. note:: If both measures being compared are 'atonal', then
+	.. note:: If both measures being compared are atonal, then
 	   the method returns true.  Perhaps not surpisingly, 
-	   if one is 'atonal' and the other is not, then the method returns False.
+	   if one is atonal and the other is not, then the method returns False.
 	   See the example for more about this
 
         Kwargs:
@@ -316,12 +316,12 @@ class ScoreDiff:
        	key_signature1 = self.index1['key'][part1][msr1]
         key_signature2 = self.index2['key'][part2][msr2]
 
-	if(key_signature1 == 'atonal' and not key_signature2 == 'atonal' or
-			key_signature2 == 'atonal' and not key_signature1 == 'atonal'):
+	if(key_signature1 is None  and key_signature2 is not None or
+			key_signature2 is None and key_signature1 is not None):
             
 	    return False
 
-        if(key_signature1 == 'atonal' and key_signature2 == 'atonal'):
+        if(key_signature1 is None and key_signature2 is None):
 
 	    return True
         		
