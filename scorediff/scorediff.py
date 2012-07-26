@@ -16,6 +16,7 @@ logging.basicConfig(filename='debug.log', level = logging.DEBUG)
 logging.disable(logging.DEBUG)
 from tables import *
 
+
 class ScoreDiff:
     """The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
     to the initialization function, so that the user can detect and display certain differences.
@@ -58,9 +59,14 @@ class ScoreDiff:
         """Useful for displaying the differences between the two scores visually
 
         Kwargs:
-          msr1 and msr2 (int): A measure number to display
+          msr1 and msr2 (int): measure numbers to display
 
-	  part1 and part2 (int): A part number to examine.  
+	  part1 and part2 (int): part numbers to display 
+
+	Raises:
+	  PartRangeError: If user passes in a part that is out of range for either score
+
+	  MeasureRangeError: If user passes in a measure that is out of range for either score
           
 	  
         """
@@ -78,9 +84,9 @@ class ScoreDiff:
 	specified measure and for the specified part
 
 	Kwargs:
-	  msr1 and msr2 (int): the measure number at which to make the comparison
-	
-	  part1 and part2 (int): the part for which to make the comparison
+	  msr1 and msr2 (int): The measures to compare	
+	  
+	  part1 and part2 (int): The parts to compare
 
 	Returns:
 	  boolean. The result of the comparison::
@@ -89,9 +95,11 @@ class ScoreDiff:
 	   False -- The scores do not have the same accidentals
 
 	Raises:
-	  ScoreException
-	
-	
+	  PartRangeError: If user passes in a part that is out of range for either score
+	  
+	  MeasureRangeError: If user passes in a measure that is out of range for either score
+
+
 	"""
 
         self.__verify_part_and_measure__(msr1, part1, msr2, part2)
@@ -189,9 +197,9 @@ class ScoreDiff:
 	at the specified measure and for the specified part [#f2]_
 	
 	Kwargs:
-          msr1 and msr2 (int):  the measure number at which to make the comparison
-          
-	  part1 and part2 (int): the part for which to make the comparison
+          msr1 and msr2 (int):  The measures to compare
+
+	  part1 and part2 (int): The parts to compare
 
         Returns:
           boolean.   The result of the comparison::
@@ -200,7 +208,10 @@ class ScoreDiff:
            False -- The scores do not have the same articulations
 
         Raises:
-          ScoreException
+	  PartRangeError: If user passes in a part that is out of range for either score
+	  
+	  MeasureRangeError: If user passes in a measure that is out of range for either score
+
        
 
         """
@@ -230,9 +241,9 @@ class ScoreDiff:
 	at the specified measure and for the specified part
 
         Kwargs:
-          msr1 and msr2 (int):  the measure number at which to make the comparison
-          
-	  part1 and part2 (int): the part for which to make the comparison
+          msr1 and msr2 (int):  The measures to compare
+
+	  part1 and part2 (int): The parts to compare
 
         Returns:
           boolean.   The result of the comparison::
@@ -241,7 +252,10 @@ class ScoreDiff:
            False -- The scores do not have the same clef markings
 
         Raises:
-          ScoreException
+	  PartRangeError: If user passes in a part that is out of range for either score
+	  
+	  MeasureRangeError: If user passes in a measure that is out of range for either score
+
 
 
         """
@@ -264,9 +278,9 @@ class ScoreDiff:
 	at the specified measure and for the specified part
 
         Kwargs:
-          msr1 and msr2 (int):  the measure number at which to make the comparison
-          
-	  part1 and part2 (int): the part for which to make the comparison
+          msr1 and msr2 (int): The measures to compare
+
+	  part1 and part2 (int): The parts to compare
 
         Returns:
           boolean.   The result of the comparison::
@@ -275,7 +289,10 @@ class ScoreDiff:
            False -- The scores do not have the same key
 
         Raises:
-          ScoreException
+	  PartRangeError: If user passes in a part that is out of range for either score
+	  
+	  MeasureRangeError: If user passes in a measure that is out of range for either score
+
        
 
         """
@@ -303,9 +320,9 @@ class ScoreDiff:
         """Checks if the two scores both have the same ornaments at the specified measure and for the specified part
 
         Kwargs:
-          msr1 and msr2 (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  The measures to compare
           
-	  part1 and part2 (int): the part for which to make the comparison
+	  part1 and part2 (int): The parts to compare
 
         Returns:
           boolean.   The result of the comparison::
@@ -314,7 +331,10 @@ class ScoreDiff:
            False -- The scores do not have the same ornaments
 
         Raises:
-          ScoreException
+	  PartRangeError: If user passes in a part that is out of range for either score
+	  
+	  MeasureRangeError: If user passes in a measure that is out of range for either score
+
 
 
         """
@@ -369,9 +389,9 @@ class ScoreDiff:
 
         
 	Kwargs:
-          msr1 and msr2 (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  The measures to compare
           
-	  part1 and part2 (int): the part for which to make the comparison
+	  part1 and part2 (int): The parts to compare
 
         Returns:
           boolean.   The result of the comparison::
@@ -380,7 +400,9 @@ class ScoreDiff:
            False -- The scores do not have the same pitches
 
         Raises:
-          ScoreException
+	  PartRangeError: If user passes in a part that is out of range for either score
+	  
+	  MeasureRangeError: If user passes in a measure that is out of range for either score
        
 
         """
@@ -401,9 +423,9 @@ class ScoreDiff:
         .. note:: This function will determine if the same pitches are present without considering the order in which they appear.
 
         Kwargs:
-          msr1 and msr2 (int): the measure number at which to make the comparison
+          msr1 and msr2 (int): The measures to compare
 
-	  part1 and part2 (int): the part for which to make the comparison
+	  part1 and part2 (int): The parts to compare
 
         Returns:
           boolean.  The result of the comparison::
@@ -412,7 +434,10 @@ class ScoreDiff:
 	    False -- The scores do not have the same pitches
 
         Raises:
-	   ScoreException
+	   PartRangeError: If user passes in a part that is out of range for either score
+	   
+	   MeasureRangeError: If user passes in a measure that is out of range for either score
+
 
 
 	"""
@@ -431,9 +456,9 @@ class ScoreDiff:
 	sites at the specified measure and for the specified part [#f1]_
 	
 	Kwargs:
-          msr1 and msr2 (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  The measures to compare
           
-	  part1 and part2 (int): the part for which to make the comparison
+	  part1 and part2 (int): The parts to compare
 
         Returns:
           boolean.   The result of the comparison::
@@ -442,7 +467,10 @@ class ScoreDiff:
            False -- The scores do not have the same spanners
 
         Raises:
-          ScoreException
+	   PartRangeError: If user passes in a part that is out of range for either score
+	   
+	   MeasureRangeError: If user passes in a measure that is out of range for either score
+
        
 
         """
@@ -490,9 +518,9 @@ class ScoreDiff:
 	directions at the specified measure and for the specified part
 
         Kwargs:
-          msr1 and msr2 (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  The measures to compare
           
-	  part1 and part2 (int): the part for which to make the comparison
+	  part1 and part2 (int): The parts to compare
 
         Returns:
           boolean.   The result of the comparison::
@@ -501,7 +529,10 @@ class ScoreDiff:
            False -- The scores do not have the same stem directions
 
         Raises:
-          ScoreException
+	  PartRangeError: If user passes in a part that is out of range for either score
+	  
+	  MeasureRangeError: If user passes in a measure that is out of range for either score
+
        
 
         """
@@ -558,9 +589,9 @@ class ScoreDiff:
 	signature at the specified measure and for the specified part
 
         Kwargs:
-          msr1 and msr2 (int):  the measure number at which to make the comparison
+          msr1 and msr2 (int):  The measures to compare
           
-	  part1 and part2 (int): the part for which to make the comparison
+	  part1 and part2 (int): The parts to compare
 
         Returns:
           boolean.   The result of the comparison::
@@ -569,7 +600,10 @@ class ScoreDiff:
            False -- The scores do not have the same time signature
 
         Raises:
-          ScoreException
+	   PartRangeError: If user passes in a part that is out of range for either score
+	   
+	   MeasureRangeError: If user passes in a measure that is out of range for either score
+
        
 
         """
@@ -593,12 +627,15 @@ class ScoreDiff:
 	not outside of the range that exists for either score
 
         Args:
-          part1 and part2 (int): The part number to check
+          part1 and part2 (int): The part number to check for score1 and score2, respectively
 
-	  msr1 and msr2 (int): The measure number to check
+	  msr1 and msr2 (int): The measure number to check for score1 and score2, respectively
 
         Raises:
-          ScoreException
+	   PartRangeError: If user passes in a part that is out of range for either score
+	   
+	   MeasureRangeError: If user passes in a measure that is out of range for either score
+
 
 
         """
@@ -608,32 +645,32 @@ class ScoreDiff:
 
 	if (msr1 >= len(self.score1.parts[part1].getElementsByClass('Measure').elements) or msr1 < 0):
 
-	    raise MeasureRangeError("measure number "+str(msr) + " does not exist for "+self.name1)
+	    raise MeasureRangeError("measure number "+str(msr1) + " does not exist for "+self.name1)
 	
 	if (msr2 >= len(self.score2.parts[part2].getElementsByClass('Measure').elements) or msr2 < 0):
 		
-	    raise MeasureRangeError("measure number "+str(msr) + " does not exist for "+self.name2)
+	    raise MeasureRangeError("measure number "+str(msr2) + " does not exist for "+self.name2)
 
 
     def __verify_part__(self, part1, part2):
         """Checks to make sure the part number a user has entered is not outside the range that exists for either score
 
 	Args:
-	  part1 and part2 (int): The part number to check
+	  part1 and part2 (int): The part number to check for score1 and score2, respectively
 
 	Raises:
-	  ScoreException
+	  PartRangeError: If user passes in a part that is out of range for either score
 
 
 	"""
 
         if (part1 >= len(self.score1.parts) or part1 < 0):
 
-            raise PartRangeError("part number " + str(part) + " does not exist for " + self.name1)
+            raise PartRangeError("part number " + str(part1) + " does not exist for " + self.name1)
 
         if (part2 >= len(self.score2.parts) or part2 < 0):
 
-            raise PartRangeError("part number " + str(part) + " does not exist for " + self.name2)
+            raise PartRangeError("part number " + str(part2) + " does not exist for " + self.name2)
 
 
 class RangeError(Exception):

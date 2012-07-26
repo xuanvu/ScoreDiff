@@ -227,7 +227,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'scorediff', u'scorediff Documentation',
+  ('index', 'scorediff', u'scorediff documentation',
    u'Julien Dubeau', 'scorediff', 'One line description of project.',
    'Miscellaneous'),
 ]

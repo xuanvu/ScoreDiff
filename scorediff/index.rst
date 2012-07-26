@@ -9,11 +9,12 @@ Welcome to ScoreDiff's Documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    about
-   ScoreDiff
-   Tables
+   modules
+   
+   
 
 
 Indices and tables

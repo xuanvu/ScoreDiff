@@ -6,7 +6,7 @@ This tool could be used to compare different musicxml versions of a piece of mus
 
 Plans For The Future
 =====================
-Additional comparisons will likely be added to those currently supported in future versions.
+Additional comparisons will likely be added to those currently supported in future versions. 
 
 Contact
 =========
