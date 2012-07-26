@@ -3,7 +3,7 @@
 from scorediff import *
 from os.path import abspath
 
-path = abspath('test_cases')
+path = abspath('scorediff/test_cases')
 
 def test_key(score1, score2, measure1=0, part1=0, measure2=0, part2=0):
 
