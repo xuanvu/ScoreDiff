@@ -533,6 +533,12 @@ class ScoreDiff:
         """Checks if the two scores both have the same stem 
 	directions at the specified measure and for the specified part
 
+	.. note:: This method will consider a chord with multiple upward
+	   pointing stems as one upward pointing stem.  This is done to facilitate
+	   the comparison of a passage with chords to simpler passages.  The method
+	   will, however, pick up on a stem direction within a chord that is different 
+	   from the other stem directions in the chord.
+
         Kwargs:
           msr1 and msr2 (int):  The measures to compare
           
@@ -808,7 +814,7 @@ class PassageException(Exception):
 	return repr(self.value)
 
 class AtonalPassageException(PassageException):
-    """Class used for handling atonal passages
+    """Exception raised when an atonal passage is found
 
     """
 
