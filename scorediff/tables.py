@@ -134,7 +134,7 @@ class Tables:
 
 	temp = list()
 	measures = self.score.parts[part].getElementsByClass('Measure')
-	recent_key = 'atonal'
+	recent_key = None
 
 	for index, measure in enumerate(measures):
 

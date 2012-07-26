@@ -136,13 +136,8 @@ Suppose a musicxml file contains the following snippet::
 
 If it seems like something is missing here, it's because
 a key signature was intentionally omitted.  The have_same_key_signature
-method will treat this measure as an 'atonal' passage, and assign
-the key signature of this measure to be 'atonal'.  This is done
-to give a musicxml writer more flexibility(and perhaps peace of mind),
-since the intuitive way of encoding an atonal passage is not to give the
-measure a key signature of no sharps or flats, but to leave off a key signature 
-altogether. There is a big difference between a piece that is in a key
-with no sharps or flats, and a piece that does not have a key signature.
+method will treat this measure as an atonal passage.  Two atonal passages
+will be said to have the same key signature.
 
 
 -------
