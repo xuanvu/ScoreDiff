@@ -1,0 +1,4 @@
+include *.txt
+include scorediff/__init__.py
+include scorediff/scorediff.py
+include scorediff/tables.py
