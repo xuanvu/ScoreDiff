@@ -83,6 +83,11 @@ class ScoreDiff:
         """Checks if the two scores both have the same accidentals at the 
 	specified measure and for the specified part
 
+	.. note:: This function will ignore a cautionary sharp or flat on a pitch
+	   that is already altered in the same way in the key signature unless
+	   that pitch has previously had a natural applied to it in the same
+	   measure
+
 	Kwargs:
 	  msr1 and msr2 (int): The measures to compare	
 	  
