@@ -271,8 +271,6 @@ class ScoreDiff:
 
         self.__verify_part_and_measure__(msr1, part1, msr2, part2)
 
-        measures1 = self.score1.parts[part1].getElementsByClass('Measure')
-	measures2 = self.score2.parts[part2].getElementsByClass('Measure')
         clef1 = self.index1['clef'][part1][msr1]
         clef2 = self.index2['clef'][part2][msr2]
 	        	
@@ -575,7 +573,7 @@ class ScoreDiff:
 
 		    temp.add(notes1[index].getStemDirection(pitch))
 
-		stems1 += list(temp)
+		stems1 += temp
 
 						
 	    else:
@@ -592,7 +590,7 @@ class ScoreDiff:
 
 		    temp.add(notes2[index].getStemDirection(pitch))
 
-		stems2 += list(temp)
+		stems2 += temp
 
 			
             else:

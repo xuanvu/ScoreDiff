@@ -42,7 +42,7 @@ class Tables:
         temp = list()
 	measures = self.score.parts[part].getElementsByClass('Measure')
         
-	for index, measure in enumerate(measures):
+	for measure in measures:
 
 	    if(measure.clef is not None):
 
@@ -89,7 +89,7 @@ class Tables:
 	temp = list()
 	measures = self.score.parts[part].getElementsByClass('Measure')
 
-	for index, measure in enumerate(measures):
+	for measure in measures:
 
 	    if(measure.timeSignature is not None):
 
@@ -137,7 +137,7 @@ class Tables:
 	measures = self.score.parts[part].getElementsByClass('Measure')
 	recent_key = None
 
-	for index, measure in enumerate(measures):
+	for measure in measures:
 
 	    if(measure.keySignature is not None):
 
