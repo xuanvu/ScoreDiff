@@ -41,6 +41,7 @@ class Tables:
 	
         temp = list()
 	measures = self.score.parts[part].getElementsByClass('Measure')
+	recent_clef = None
         
 	for measure in measures:
 
@@ -88,6 +89,7 @@ class Tables:
 
 	temp = list()
 	measures = self.score.parts[part].getElementsByClass('Measure')
+	recent_time = None
 
 	for measure in measures:
 
