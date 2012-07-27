@@ -11,7 +11,8 @@
 
 class Tables:
     """The Tables class builds a variety of tables
-    for convenient lookup
+    for convenient lookup.  The __init__ method needs a music21.stream.Score
+    object as its parameter
 
     """
 
@@ -68,7 +69,7 @@ class Tables:
 
         for i in range(0, len(self.score.parts.elements)):
 
-	    temp.append(self.build_clef(i))
+	    temp.append(self.build_clefs(i))
 
 	return temp
 
