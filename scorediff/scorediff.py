@@ -365,8 +365,7 @@ class ScoreDiff:
         for index in range(0, len(notes1)):
             
             e1 = notes1[index].expressions
-                        
-            
+                                    
             for inner_index in range(0, len(e1)):
                 
                 classes = e1[inner_index].classes
@@ -390,8 +389,7 @@ class ScoreDiff:
 		    if(classes[third_index] in ScoreDiff.ORNAMENTS):
                         
                         ornaments2.append(classes[third_index])
-                
-        
+                        
 	logging.debug("ornaments1: "+ str(ornaments1))
 	logging.debug("ornaments2: " + str(ornaments2))
 	return ornaments1 == ornaments2    
