@@ -172,7 +172,7 @@ class Tables:
     def build(self):
         """Returns a dictionary of doubly nested lists.  These include all
 	of the data that can be obtained from the other methods in this class,
-	stored as {'clef':{cleftable}, 'key:{keytable}', 'time:{timetable}'}
+	stored as {'clef':{cleftable}, 'key':{keytable}, 'time':{timetable}}
 	
 	Returns:
 	  dictionary.  A dictionary of the form described above
