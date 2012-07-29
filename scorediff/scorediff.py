@@ -162,11 +162,11 @@ class ScoreDiff:
         naturals = set()
         accidentals = []
 	
-        for index in range(0, len(notes)):
+        for note in notes:
 
-            if(notes[index].isChord):
+            if(note.isChord):
 
-                for pitch in notes[index].pitches:
+                for pitch in note.pitches:
 
                     if(not pitch.accidental is None and not pitch.name in altered):
 
@@ -181,18 +181,18 @@ class ScoreDiff:
                         accidentals.append(pitch.accidental)
                         naturals.discard(pitch.name)
 		
-            elif(not notes[index].accidental is None and not notes[index].name in altered):
+            elif(not note.accidental is None and not note.name in altered):
 
-                accidentals.append(notes[index].accidental)
+                accidentals.append(note.accidental)
 
-                if(notes[index].accidental.name == 'natural'):
+                if(note.accidental.name == 'natural'):
 
-                    naturals.add(notes[index].name)
+                    naturals.add(note.name)
 
-            elif(notes[index].name in altered and notes[index].name[0] in naturals):
+            elif(note.name in altered and note.name[0] in naturals):
 
-                accidentals.append(notes[index].accidental)
-                naturals.discard(notes[index].name)
+                accidentals.append(note.accidental)
+                naturals.discard(note.name)
 					
         return accidentals
 
@@ -228,13 +228,13 @@ class ScoreDiff:
 	articulations1 = []
 	articulations2 = []
         
-        for index in range(0, len(notes1)):
+        for note in notes1:
             
-            articulations1 += notes1[index].articulations
+            articulations1 += note.articulations
 
-	for index in range(0, len(notes2)):
+	for note in notes2:
 
-	    articulations2 += notes2[index].articulations
+	    articulations2 += note.articulations
         	
 	logging.debug("articulations1: " +str(articulations1))
 	logging.debug("articulations2: "+ str(articulations2))
@@ -360,33 +360,33 @@ class ScoreDiff:
         ornaments1 = []
 	ornaments2 = []
 
-        for index in range(0, len(notes1)):
+        for note in notes1:
             
-            e1 = notes1[index].expressions
+            expressions = note.expressions
                                     
-            for inner_index in range(0, len(e1)):
+            for expression in expressions:
                 
-                classes = e1[inner_index].classes
+                classes = expression.classes
 		    
-	        for third_index in range(0, len(classes)):
+	        for cls in classes:
 
-		    if(classes[third_index] in ScoreDiff.ORNAMENTS):
+		    if(cls in ScoreDiff.ORNAMENTS):
                     
-                        ornaments1.append(classes[third_index])
+                        ornaments1.append(cls)
                 
-	for index in range(0, len(notes2)):
+	for note in notes2:
 
-	    e2 = notes2[index].expressions
+	    expressions = note.expressions
 	    
-            for inner_index in range(0, len(e2)):
+            for expression in expressions:
                 
-                classes = e2[inner_index].classes
+                classes = expression.classes
 
-	        for third_index in range(0, len(classes)):
+	        for cls in classes:
 		    
-		    if(classes[third_index] in ScoreDiff.ORNAMENTS):
+		    if(cls in ScoreDiff.ORNAMENTS):
                         
-                        ornaments2.append(classes[third_index])
+                        ornaments2.append(cls)
                         
 	logging.debug("ornaments1: "+ str(ornaments1))
 	logging.debug("ornaments2: " + str(ornaments2))
@@ -495,30 +495,30 @@ class ScoreDiff:
 	spanners1=[]
 	spanners2=[]
 
-	for index in range(0, len(notes1)):
+	for note in notes1:
 
-	    if(notes1[index].isChord):
+	    if(note.isChord):
 
-	        for pitch in notes1[index].pitches:
+	        for pitch in note.pitches:
 
 		    spanners1 += pitch.getSpannerSites()
 
 	    else:
 
-	        spanners1 += notes1[index].getSpannerSites()
+	        spanners1 += note.getSpannerSites()
 	
 
-	for index in range(0, len(notes2)):
+	for note in notes2:
 		
-	    if(notes2[index].isChord):
+	    if(note.isChord):
 
-	        for pitch in notes2[index].pitches:
+	        for pitch in note.pitches:
 
 		    spanners2 += pitch.getSpannerSites()
 
 	    else:
 
-	        spanners2 += notes2[index].getSpannerSites()
+	        spanners2 += note.getSpannerSites()
 	
 	logging.debug("spanners1: " + str(spanners1))
 	logging.debug("spanners2: " + str(spanners2))
@@ -563,39 +563,39 @@ class ScoreDiff:
         stems1=[]
 	stems2=[]
         
-	for index in range(0, len(notes1)):
+	for note in notes1:
 
-	    if(notes1[index].isChord):
+	    if(note.isChord):
 
 	        temp = set()
 
-		for pitch in notes1[index].pitches:
+		for pitch in note.pitches:
 
-		    temp.add(notes1[index].getStemDirection(pitch))
+		    temp.add(note.getStemDirection(pitch))
 
 		stems1 += temp
 
 						
 	    else:
 
-	        stems1+=[notes1[index].stemDirection]
+	        stems1+=[note.stemDirection]
 	
-        for index in range(0, len(notes2)):
+        for note in notes2:
 			
-	    if(notes2[index].isChord):
+	    if(note.isChord):
 
 	        temp = set()
 
-		for pitch in notes2[index].pitches:
+		for pitch in note.pitches:
 
-		    temp.add(notes2[index].getStemDirection(pitch))
+		    temp.add(note.getStemDirection(pitch))
 
 		stems2 += temp
 
 			
             else:
 
-                stems2 += [notes2[index].stemDirection]
+                stems2 += [note.stemDirection]
 	
 	logging.debug("stems1: " + str(stems1))
 	logging.debug("stems2: " + str(stems2))
