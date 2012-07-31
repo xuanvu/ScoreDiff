@@ -118,7 +118,7 @@ class ScoreDiff:
 
 
     def __get_accidentals__(self, score_number, msr=0, part=0):
-        """A helper method for the have_same_accidentals fuction
+        """A helper method for the have_same_accidentals method
 	
 	Args:
 	  msr (int): measure at which the accidentals should be collected
