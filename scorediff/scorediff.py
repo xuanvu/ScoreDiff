@@ -71,7 +71,7 @@ class ScoreDiff:
 	  
         """
 
-        self.__verify_part_and_measure__(msr1, part1, msr2, part2)	
+        self.__verify_part_and_measure(msr1, part1, msr2, part2)	
 	
 	partial1 = self.score1.parts[part1].getElementsByClass('Measure')[msr1]
 	partial2 = self.score2.parts[part2].getElementsByClass('Measure')[msr2]
@@ -84,9 +84,7 @@ class ScoreDiff:
 	specified measures and for the specified parts
 
 	.. note:: This method will ignore a cautionary sharp or flat on a pitch
-	   that is already altered in the same way in the key signature unless
-	   that pitch has previously had a natural applied to it in the same
-	   measure
+	   that is already altered in the same way in the key signature.
 
 	Kwargs:
 	  msr1 and msr2 (int): The measures to compare	
@@ -107,17 +105,17 @@ class ScoreDiff:
 
 	"""
 
-        self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+        self.__verify_part_and_measure(msr1, part1, msr2, part2)
         
-	accidentals1 = self.__get_accidentals__(1,msr1,part1)
-	accidentals2 = self.__get_accidentals__(2,msr2,part2)
+	accidentals1 = self.__get_accidentals(1,msr1,part1)
+	accidentals2 = self.__get_accidentals(2,msr2,part2)
 
 	logging.debug("accidentals1: " +str([x.name for x in accidentals1]))
 	logging.debug("accidentals2: " +str([x.name for x in accidentals2]))
 	return accidentals1 == accidentals2
 
 
-    def __get_accidentals__(self, score_number, msr=0, part=0):
+    def __get_accidentals(self, score_number, msr=0, part=0):
         """A helper method for the have_same_accidentals method
 	
 	Args:
@@ -221,7 +219,7 @@ class ScoreDiff:
 
         """
 
-	self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+	self.__verify_part_and_measure(msr1, part1, msr2, part2)
                 
 	notes1 = self.score1.parts[part1].getElementsByClass('Measure')[msr1].flat.notes
         notes2 = self.score2.parts[part2].getElementsByClass('Measure')[msr2].flat.notes
@@ -269,7 +267,7 @@ class ScoreDiff:
 
         """
 
-        self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+        self.__verify_part_and_measure(msr1, part1, msr2, part2)
 
         clef1 = self.index1['clef'][part1][msr1]
         clef2 = self.index2['clef'][part2][msr2]
@@ -312,7 +310,7 @@ class ScoreDiff:
         """
 
 
-        self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+        self.__verify_part_and_measure(msr1, part1, msr2, part2)
        	key_signature1 = self.index1['key'][part1][msr1]
         key_signature2 = self.index2['key'][part2][msr2]
 
@@ -353,7 +351,7 @@ class ScoreDiff:
 
         """
 
-	self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+	self.__verify_part_and_measure(msr1, part1, msr2, part2)
         
         notes1 = self.score1.parts[part1].getElementsByClass('Measure')[msr1].flat.notes
         notes2 = self.score2.parts[part2].getElementsByClass('Measure')[msr2].flat.notes
@@ -419,7 +417,7 @@ class ScoreDiff:
 
         """
 
-	self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+	self.__verify_part_and_measure(msr1, part1, msr2, part2)
 
         pitches1 = self.score1.parts[part1].getElementsByClass('Measure')[msr1].flat.notes.pitches
         pitches2 = self.score2.parts[part2].getElementsByClass('Measure')[msr2].flat.notes.pitches
@@ -454,7 +452,7 @@ class ScoreDiff:
 
 	"""
 
-	self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+	self.__verify_part_and_measure(msr1, part1, msr2, part2)
 
 	pitches1 = sorted(self.score1.parts[part1].getElementsByClass('Measure')[msr1].flat.notes.pitches)
         pitches2 = sorted(self.score2.parts[part2].getElementsByClass('Measure')[msr2].flat.notes.pitches)
@@ -487,7 +485,7 @@ class ScoreDiff:
 
         """
 
-	self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+	self.__verify_part_and_measure(msr1, part1, msr2, part2)
         
         notes1 = self.score1.parts[part1].getElementsByClass('Measure')[msr1].flat.notes
         notes2 = self.score2.parts[part2].getElementsByClass('Measure')[msr2].flat.notes
@@ -555,7 +553,7 @@ class ScoreDiff:
 
         """
 
-	self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+	self.__verify_part_and_measure(msr1, part1, msr2, part2)
 
         notes1 = self.score1.parts[part1].getElementsByClass('Measure')[msr1].flat.notes
         notes2 = self.score2.parts[part2].getElementsByClass('Measure')[msr2].flat.notes
@@ -626,7 +624,7 @@ class ScoreDiff:
 
         """
 
-	self.__verify_part_and_measure__(msr1, part1, msr2, part2)
+	self.__verify_part_and_measure(msr1, part1, msr2, part2)
 
         time_signature1 = self.index1['time'][part1][msr1]        
 	time_signature2 = self.index2['time'][part2][msr2]	
@@ -640,7 +638,7 @@ class ScoreDiff:
 	logging.debug("time signature2: "+str(numerator2) +"/"+str(denominator2))
         return numerator1 == numerator2 and denominator1 == denominator2 
 
-    def __verify_part_and_measure__(self, msr1, part1, msr2, part2):
+    def __verify_part_and_measure(self, msr1, part1, msr2, part2):
         """Checks to make sure the part and measure numbers a user has entered are 
 	not outside of the range that exists for either score
 
@@ -658,7 +656,7 @@ class ScoreDiff:
 
         """
 
-        self.__verify_part__(part1, part2)
+        self.__verify_part(part1, part2)
 
 
 	if (msr1 >= len(self.score1.parts[part1].getElementsByClass('Measure').elements) or msr1 < 0):
@@ -670,7 +668,7 @@ class ScoreDiff:
 	    raise MeasureRangeError("measure number "+str(msr2) + " does not exist for "+self.name2)
 
 
-    def __verify_part__(self, part1, part2):
+    def __verify_part(self, part1, part2):
         """Checks to make sure the part number a user has entered is not outside the range that exists for either score
 
 	Args:
